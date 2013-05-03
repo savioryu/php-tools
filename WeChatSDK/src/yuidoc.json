@@ -1,0 +1,12 @@
+{
+  "name"        : "WeChatSDK",
+  "description" : "WeChat Callback SDK for php",
+  "version"     : "0.5",
+  "logo"        : "http://admin.wechat.com/en_US/htmledition/images/logo147d79.png",
+  "url"         : "https://www.github.com/zemzheng/php-tools/WeChatSDK/",
+  "options" : {
+    "outdir"    : "../doc",
+    "extension" : ".php",
+    "theme"     : "zem"
+  }
+}

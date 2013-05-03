@@ -1,0 +1,14 @@
+.show{
+  width:80%;min-width:80%;max-width:80%;
+  min-height:500px;
+  display:block;
+  position:relative;
+  margin:0 auto;
+  text-align:left;
+}
+.pannel-row{
+  margin:20px auto;
+  box-shadow:0 1px 5px #ccc;
+  padding:10px; 
+  text-align:center;
+}

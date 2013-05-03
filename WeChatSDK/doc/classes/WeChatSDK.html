@@ -1,0 +1,2113 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>WeChatSDK - WeChatSDK</title>
+    <link rel="stylesheet" href="../assets/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../assets/css/bootstrap-responsive.min.css" />
+  </head>
+  <body>
+
+    <div class="container-fluid">
+      <div id="header">
+        <h1 class="logo">
+          <a href="../index.html">
+            <img src="http://admin.wechat.com/en_US/htmledition/images/logo147d79.png" title="WeChatSDK"/>
+          </a></h1>
+        <div class="version">
+          <em>API Docs for: 0.5</em>
+        </div>
+      </div>
+
+      <div class="row-fluid">
+        <div id="main" class="span9"> <div class="content"><!-- vim:set filetype=html: -->
+<h2>Class WeChatSDK</h2>
+
+
+
+<span class="foundat">Class defined in: <a href="../files/WechatSDK.php.html#l8"><code>WechatSDK.php:8</code></a></span>
+<div class="intro"><p>WeChat Callback API SDK</p></div>
+
+
+
+<div id="classdocs">
+    <ul>
+        
+        <li><a href="#methods">Methods</a></li>
+        
+        
+        
+        
+        <li><a href="#events">Events</a></li>
+        
+    </ul>
+    <div>
+        
+            <div id="methods">
+            
+                <!-- vim:set filetype=html: -->
+<div id="methods___construct" class="well method item">
+  <h3 class="name">
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+    
+
+    __construct
+
+    
+        <span class="args">
+            <span class="paren">(</span>
+            
+                    
+                        <code>$APPSECRET</code>
+                    
+            
+                    
+                        <code>$APPID</code>
+                    
+            
+                    
+                        <code>$_token</code>
+                    
+            
+                    
+                        <code>$_handleReqFuncs</code>
+                    
+            
+                    
+                        <code>$_actionHookFuncs</code>
+                    
+            
+            <span class="paren">)</span>
+        </span>
+    
+  </h3>
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/WechatSDK.php.html#l24"><code>WechatSDK.php:24</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">$APPSECRET</code>
+                        <span class="type">String</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>: APPSECRET</p>
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">$APPID</code>
+                        <span class="type">String</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>: APPID</p>
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">$_token</code>
+                        <span class="type">String</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>: The Token set by YOU</p>
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">$_handleReqFuncs</code>
+                        <span class="type">Array</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>: [Selectable] Functions, for handle Request
+  <pre>
+    array(
+      'common'      => function($postObj){},  # Handler for all data/event push request. [handleReqFuncs::common]
+       'text'        => function($postObj){},  # Handler for text           push request. [handleReqFuncs::text]
+        'image'       => function($postObj){},  # Handler for image          push request. [handleReqFuncs::image]
+        'location'    => function($postObj){},  # Handler for location       push request. [handleReqFuncs::location]
+        'link'        => function($postObj){},  # Handler for link           push request. [handleReqFuncs::link]
+        'event'       => function($postObj){},  # Handler for event          push request. [handleReqFuncs::event]
+     'accessCheck' => function(){},          # Handler for CallBack API Verification [handleReqFuncs::accessCheck]
+      '404'         => function(){},          # Handler for other case                [handleReqFuncs::404]
+    )
+  </pre></p>
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">$_actionHookFuncs</code>
+                        <span class="type">Array</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>: [Selectable] Common Functions for each instance
+ <pre>
+    array(
+      'beforeSend' => function($msg){} # @see event actionHook::beforeSend
+    )
+ </pre></p>
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                <p><pre>
+ // Your codes here...
+ $wechat = new WeChatSDK(
+   $APPSECRET, $APPID, $<em>token,
+   $</em>handleReqFuncs     ,
+   $_actionHookFuncs
+ );
+ </pre></p>
+            </div>
+        </div>
+    
+</div>
+
+
+            
+                <!-- vim:set filetype=html: -->
+<div id="methods_accessDataPush" class="well method item">
+  <h3 class="name">
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+    
+
+    accessDataPush
+
+    
+        <span class="paren">()</span>
+    
+  </h3>
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/WechatSDK.php.html#l74"><code>WechatSDK.php:74</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Start to handle current HTTP Request.</p>
+    </div>
+
+    
+
+    
+
+    
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                <pre>
+// Your codes here ...
+$wechat = new WeChatSDK($APPSECRET, $APPID, $_token,
+ $_handleReqFuncs     ,
+  $_actionHookFuncs
+);
+$wechat->accessDataPush();
+</pre>
+            </div>
+        </div>
+    
+</div>
+
+
+            
+                <!-- vim:set filetype=html: -->
+<div id="methods_delMenuList" class="well method item">
+  <h3 class="name">
+    
+
+    
+
+    
+
+    
+        <span class="label">static</span>
+    
+
+    
+
+    
+    
+    
+        <span class="label label-info">
+            Boolen
+        </span>
+    
+
+    delMenuList
+
+    
+        <span class="paren">()</span>
+    
+  </h3>
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/WechatSDK.php.html#l515"><code>WechatSDK.php:515</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Delete the custom menu</p>
+    </div>
+
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">Boolen</span>:
+                    
+                    Delete custom menu successfully?
+                
+            </div>
+        </div>
+    
+
+    
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                <pre>
+      // Your codes here...
+      $wechat = new WeChatSDK($APPSECRET, $APPID, $_token);
+      print_r( $wechat->delMenuList() ? 'Yes" : 'No' );
+      // ...
+</pre>
+            </div>
+        </div>
+    
+</div>
+
+
+            
+                <!-- vim:set filetype=html: -->
+<div id="methods_getMenuList" class="well method item">
+  <h3 class="name">
+    
+
+    
+
+    
+
+    
+        <span class="label">static</span>
+    
+
+    
+
+    
+    
+    
+        <span class="label label-info">
+            Array | Null
+        </span>
+    
+
+    getMenuList
+
+    
+        <span class="paren">()</span>
+    
+  </h3>
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/WechatSDK.php.html#l488"><code>WechatSDK.php:488</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Get the current custom menu list</p>
+    </div>
+
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">Array | Null</span>:
+                    
+                    return list array when success, or nothing for failure
+                
+            </div>
+        </div>
+    
+
+    
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                <pre>
+      // Your codes here...
+      $wechat = new WeChatSDK($APPSECRET, $APPID, $_token);
+      print_r( $wechat->getMenuList() );
+      // ...
+</pre>
+            </div>
+        </div>
+    
+</div>
+
+
+            
+                <!-- vim:set filetype=html: -->
+<div id="methods_sendMusic" class="well method item">
+  <h3 class="name">
+    
+
+    
+
+    
+
+    
+        <span class="label">static</span>
+    
+
+    
+
+    
+    
+    
+
+    sendMusic
+
+    
+        <span class="args">
+            <span class="paren">(</span>
+            
+                    
+                        <code>$_to</code>
+                    
+            
+                    
+                        <code>$_from</code>
+                    
+            
+                    
+                        <code>$_music</code>
+                    
+            
+                    
+                        <code>$flag</code>
+                    
+            
+            <span class="paren">)</span>
+        </span>
+    
+  </h3>
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/WechatSDK.php.html#l324"><code>WechatSDK.php:324</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">$_to</code>
+                        <span class="type">String</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>: id, who will get the msg</p>
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">$_from</code>
+                        <span class="type">String</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>: id, who sent the msg</p>
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">$_music</code>
+                        <span class="type">Array</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>: Musci info list</p>
+
+<pre>
+                   array(
+                     'title'  => # {String} => music title
+                     'desc'   => # {String} => music description
+                     'url'    => # {String} => music url
+                     'hq_url' => # {String} => high quality music url， default = $_music['music_url']
+                   )
+</pre>
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">$flag</code>
+                        <span class="type">Bool</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>: Started this msg [default = false]</p>
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                <pre>
+WeChatSDK::sendMusic( $postObj['from'], $postObj['to'], array(
+   'title'  => 'music title',
+   'desc'   => 'music description',
+   'url'    => 'music url',
+   'hq_url' => 'high quality music url'
+) );
+</pre>
+            </div>
+        </div>
+    
+</div>
+
+
+            
+                <!-- vim:set filetype=html: -->
+<div id="methods_sendRichMsg" class="well method item">
+  <h3 class="name">
+    
+
+    
+
+    
+
+    
+        <span class="label">static</span>
+    
+
+    
+
+    
+    
+    
+
+    sendRichMsg
+
+    
+        <span class="args">
+            <span class="paren">(</span>
+            
+                    
+                        <code>$to</code>
+                    
+            
+                    
+                        <code>$from</code>
+                    
+            
+                    
+                        <code>$list</code>
+                    
+            
+                    
+                        <code>$flag</code>
+                    
+            
+            <span class="paren">)</span>
+        </span>
+    
+  </h3>
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/WechatSDK.php.html#l236"><code>WechatSDK.php:236</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">$to</code>
+                        <span class="type">String</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>: id, who will get the msg</p>
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">$from</code>
+                        <span class="type">String</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>: id, who sent the msg</p>
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">$list</code>
+                        <span class="type">Array</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>: rich msg list. less then 10 items.
+<strong>If you pass 10+ msg in, only 10 before will be send.</strong></p>
+
+<pre>
+         array(
+           array(
+             'title' => # {String} => sub msg title
+             'desc'  => # {String} => sub msg description
+             'image' => # {String} => sum msg image
+             'url'   => # {String} => sub msg url
+           ),
+           ...
+         )
+</pre>
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">$flag</code>
+                        <span class="type">Bool</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>: Started this msg [default = false]</p>
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                <pre>
+// Your codes here...
+$handleText = function($postObj){
+   WeChatSDK::sendRichMsg( $postObj['from'], $postObj['to'], array(
+     array(
+             'title' => 'title 1',
+             'desc'  => 'desc 1',
+             'image' => 'http://localhost/image1',
+             'url'   => 'http://localhost/url1'
+     ),
+     array(
+             'title' => 'title 2',
+             'desc'  => 'desc 2',
+             'image' => 'http://localhost/image2',
+             'url'   => 'http://localhost/url2'
+     )
+   ) );
+};
+$wechat = WeChatSDK($APPSECRET, $APPID, $_token, array(
+   'text' => $handleText
+));
+</pre>
+            </div>
+        </div>
+    
+</div>
+
+
+            
+                <!-- vim:set filetype=html: -->
+<div id="methods_sendText" class="well method item">
+  <h3 class="name">
+    
+
+    
+
+    
+
+    
+        <span class="label">static</span>
+    
+
+    
+
+    
+    
+    
+
+    sendText
+
+    
+        <span class="args">
+            <span class="paren">(</span>
+            
+                    
+                        <code>$_to</code>
+                    
+            
+                    
+                        <code>$_from</code>
+                    
+            
+                    
+                        <code>$_content</code>
+                    
+            
+                    
+                        <code>$flag</code>
+                    
+            
+            <span class="paren">)</span>
+        </span>
+    
+  </h3>
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/WechatSDK.php.html#l378"><code>WechatSDK.php:378</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">$_to</code>
+                        <span class="type">String</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>: id, who will get the msg</p>
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">$_from</code>
+                        <span class="type">String</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>: id, who sent the msg</p>
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">$_content</code>
+                        <span class="type">String</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>: msg content text</p>
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">$flag</code>
+                        <span class="type">Bool</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>: Started this msg [default = false]</p>
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                <pre>
+WeChatSDK::sendText( $postObj['from'], $postObj['to'], 'Hello');
+</pre>
+            </div>
+        </div>
+    
+</div>
+
+
+            
+                <!-- vim:set filetype=html: -->
+<div id="methods_setMenuByJson" class="well method item">
+  <h3 class="name">
+    
+
+    
+
+    
+
+    
+        <span class="label">static</span>
+    
+
+    
+
+    
+    
+    
+
+    setMenuByJson
+
+    
+        <span class="args">
+            <span class="paren">(</span>
+            
+                    
+                        <code>$json</code>
+                    
+            
+            <span class="paren">)</span>
+        </span>
+    
+  </h3>
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/WechatSDK.php.html#l566"><code>WechatSDK.php:566</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">$json</code>
+                        <span class="type">String</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>JSON Format.</p>
+
+<pre>
+   {
+     "button":[
+       {    
+         "type":"click",
+         "name":"Today",
+         "key":"V1001_TODAY_MUSIC"
+       },
+       {
+         "name":"More",
+         "sub_button":[
+           {
+             "type":"click",
+             "name":"Hello World",
+             "key":"V1001_HELLO_WORLD"
+           },
+           {
+             "type":"click",
+             "name":"Good",
+             "key":"V1001_GOOD"
+           }
+         ]
+       }
+     ]
+   }
+</pre>
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                <pre>
+      // Your codes here...
+      $wechat = new WeChatSDK($APPSECRET, $APPID, $_token);
+      $json_string = json_decode( file_get_contents($json_file), true);
+      $wechat->setMenuByJson($json_string);
+      // ...
+</pre>
+            </div>
+        </div>
+    
+</div>
+
+
+            
+            </div>
+        
+        
+        
+        
+            <div id="events">
+            
+                <!-- vim:set filetype=html: -->
+<div id="events_actionHook::beforeSend" class="well events item">
+  <h3 class="name">
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    actionHook::beforeSend
+  </h3>
+    <span class="type"></span>
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/WechatSDK.php.html#l411"><code>WechatSDK.php:411</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>before send msg to our customer, you can log/stop it by this event.<br/></p>
+    </div>
+
+    
+
+
+    
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                <pre>
+// How to set it?
+new WeChatSDK(
+   $APPSECRET, 
+   $APPID,
+   $token,
+   $handleReqFuncsFuncs,
+   array(
+     'beforeSend' => # {String|Function} the callable function or function name.
+   )
+);
+</pre>
+            </div>
+        </div>
+    
+</div>
+
+
+            
+                <!-- vim:set filetype=html: -->
+<div id="events_actionHook::delMenuListResponse" class="well events item">
+  <h3 class="name">
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    actionHook::delMenuListResponse
+  </h3>
+    <span class="type"></span>
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/WechatSDK.php.html#l539"><code>WechatSDK.php:539</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Trigger once it got the response after try to delete custom menu</p>
+    </div>
+
+    
+
+
+    
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                <pre>
+// How to set it?
+new WeChatSDK(
+   $APPSECRET, 
+   $APPID,
+   $token,
+   $handleReqFuncsFuncs,
+   array(
+     'delMenuListResponse' => # {String|Function} the callable function or function name.
+   )
+);
+</pre>
+            </div>
+        </div>
+    
+</div>
+
+
+            
+                <!-- vim:set filetype=html: -->
+<div id="events_actionHook::setMenuListResponse" class="well events item">
+  <h3 class="name">
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    actionHook::setMenuListResponse
+  </h3>
+    <span class="type"></span>
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/WechatSDK.php.html#l632"><code>WechatSDK.php:632</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Trigger once it got the response after try to set custom menu</p>
+    </div>
+
+    
+
+
+    
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                <pre>
+// How to set it?
+new WeChatSDK(
+   $APPSECRET, 
+   $APPID,
+   $token,
+   $handleReqFuncsFuncs,
+   array(
+     'setMenuListResponse' => # {String|Function} the callable function or function name.
+   )
+);
+</pre>
+            </div>
+        </div>
+    
+</div>
+
+
+            
+                <!-- vim:set filetype=html: -->
+<div id="events_handleReqFuncs::404" class="well events item">
+  <h3 class="name">
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    handleReqFuncs::404
+  </h3>
+    <span class="type"></span>
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/WechatSDK.php.html#l225"><code>WechatSDK.php:225</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Unknow Request Handler.</p>
+    </div>
+
+    
+
+
+    
+</div>
+
+
+            
+                <!-- vim:set filetype=html: -->
+<div id="events_handleReqFuncs::accessCheck" class="well events item">
+  <h3 class="name">
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    handleReqFuncs::accessCheck
+  </h3>
+    <span class="type"></span>
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/WechatSDK.php.html#l216"><code>WechatSDK.php:216</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Trigger when request CallBack API Verification</p>
+    </div>
+
+    
+
+
+    
+</div>
+
+
+            
+                <!-- vim:set filetype=html: -->
+<div id="events_handleReqFuncs::common" class="well events item">
+  <h3 class="name">
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    handleReqFuncs::common
+  </h3>
+    <span class="type"></span>
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/WechatSDK.php.html#l99"><code>WechatSDK.php:99</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Trigger when receive push data. 
+<br/> It can be handleReqFuncs::[text/image/location/link/event]</p>
+    </div>
+
+    
+
+
+    
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                <pre>
+// How to set it?
+new WeChatSDK(
+   $APPSECRET, 
+   $APPID,
+   $token,
+   array(
+     'common' => 
+   ),
+   $actionHookFuncs
+);
+</pre>
+            </div>
+        </div>
+    
+</div>
+
+
+            
+                <!-- vim:set filetype=html: -->
+<div id="events_handleReqFuncs::event" class="well events item">
+  <h3 class="name">
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    handleReqFuncs::event
+  </h3>
+    <span class="type"></span>
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/WechatSDK.php.html#l195"><code>WechatSDK.php:195</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Trigger when receive event data push</p>
+    </div>
+
+    
+        <div class="params">
+            <h4>Event Payload:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">event</code>
+                        <span class="type">Array</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>Msg Data</p>
+
+<pre>
+   array(
+     # common
+     'from' => # {String} : id, who send this msg
+     'to'   => # {String} : id, who received this msg
+     'time' => # {Int}    : When is the msg created?
+     'type' => # {String} : msg type
+     'id'   => # {String} : msg id
+     # special
+     'event' => # {String} : event type
+     'key'   => # {String} : event key
+   )
+</pre>
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+
+    
+</div>
+
+
+            
+                <!-- vim:set filetype=html: -->
+<div id="events_handleReqFuncs::image" class="well events item">
+  <h3 class="name">
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    handleReqFuncs::image
+  </h3>
+    <span class="type"></span>
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/WechatSDK.php.html#l136"><code>WechatSDK.php:136</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Trigger when receive image data push</p>
+    </div>
+
+    
+        <div class="params">
+            <h4>Event Payload:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">image</code>
+                        <span class="type">Array</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>Msg Data</p>
+
+<pre>
+   array(
+     # common
+     'from' => # {String} : id, who send this msg
+     'to'   => # {String} : id, who received this msg
+     'time' => # {Int}    : When is the msg created?
+     'type' => # {String} : msg type
+     'id'   => # {String} : msg id
+     # special
+     'url'  => # {String} image url
+   )
+</pre>
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+
+    
+</div>
+
+
+            
+                <!-- vim:set filetype=html: -->
+<div id="events_handleReqFuncs::link" class="well events item">
+  <h3 class="name">
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    handleReqFuncs::link
+  </h3>
+    <span class="type"></span>
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/WechatSDK.php.html#l175"><code>WechatSDK.php:175</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Trigger when receive link data push</p>
+    </div>
+
+    
+        <div class="params">
+            <h4>Event Payload:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">link</code>
+                        <span class="type">Array</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>Msg Data</p>
+
+<pre>
+   array(
+     # common
+     'from' => # {String} : id, who send this msg
+     'to'   => # {String} : id, who received this msg
+     'time' => # {Int}    : When is the msg created?
+     'type' => # {String} : msg type
+     'id'   => # {String} : msg id
+     # special
+     'title' => # {String} : Link title
+     'desc' =>  # {String} : Link description
+     'url' =>   # {String} : Link url
+   )
+</pre>
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+
+    
+</div>
+
+
+            
+                <!-- vim:set filetype=html: -->
+<div id="events_handleReqFuncs::location" class="well events item">
+  <h3 class="name">
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    handleReqFuncs::location
+  </h3>
+    <span class="type"></span>
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/WechatSDK.php.html#l154"><code>WechatSDK.php:154</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Trigger when receive image data push</p>
+    </div>
+
+    
+        <div class="params">
+            <h4>Event Payload:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">location</code>
+                        <span class="type">Array</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>Msg Data</p>
+
+<pre>
+   array(
+     # common
+     'from' => # {String} : id, who send this msg
+     'to'   => # {String} : id, who received this msg
+     'time' => # {Int}    : When is the msg created?
+     'type' => # {String} : msg type
+     'id'   => # {String} : msg id
+     # special
+     'X' => # {float}  : Latitude
+     'Y' => # {float}  : Longitude
+     'S' => # {float}  : Scale
+     'I' => # {String} : Location info
+   )
+</pre>
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+
+    
+</div>
+
+
+            
+                <!-- vim:set filetype=html: -->
+<div id="events_handleReqFuncs::text" class="well events item">
+  <h3 class="name">
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    handleReqFuncs::text
+  </h3>
+    <span class="type"></span>
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/WechatSDK.php.html#l118"><code>WechatSDK.php:118</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Trigger when receive text data push</p>
+    </div>
+
+    
+        <div class="params">
+            <h4>Event Payload:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">Text</code>
+                        <span class="type">Array</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>Msg Data</p>
+
+<pre>
+   array(
+     # common
+     'from' => # {String} : id, who send this msg
+     'to'   => # {String} : id, who received this msg
+     'time' => # {Int}    : When is the msg created?
+     'type' => # {String} : msg type
+     'id'   => # {String} : msg id
+     # special
+     'text' => # {String} : Msg string
+   )
+</pre>
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+
+    
+</div>
+
+
+            
+            </div>
+        
+    </div>
+</div>
+</div> </div>
+        <div id="sidebar" class="span3"> <!-- vim:set filetype=html: -->
+<ul class="nav nav-list">
+
+<li class="nav-header">Classes</li>
+
+<li>
+<a href="../classes/WeChatSDK.html">WeChatSDK</a>
+</li>
+
+<li class="divider"></li>
+
+
+<li class="nav-header">Methods</li>
+
+<li>
+<a href="#methods___construct">__construct</a>
+</li>
+
+<li>
+<a href="#methods_accessDataPush">accessDataPush</a>
+</li>
+
+<li>
+<a href="#methods_delMenuList">delMenuList</a>
+</li>
+
+<li>
+<a href="#methods_getMenuList">getMenuList</a>
+</li>
+
+<li>
+<a href="#methods_sendMusic">sendMusic</a>
+</li>
+
+<li>
+<a href="#methods_sendRichMsg">sendRichMsg</a>
+</li>
+
+<li>
+<a href="#methods_sendText">sendText</a>
+</li>
+
+<li>
+<a href="#methods_setMenuByJson">setMenuByJson</a>
+</li>
+
+<li class="divider"></li>
+
+
+<li class="nav-header">Events</li>
+
+<li>
+<a href="#events_actionHook::beforeSend">actionHook::beforeSend</a>
+</li>
+
+<li>
+<a href="#events_actionHook::delMenuListResponse">actionHook::delMenuListResponse</a>
+</li>
+
+<li>
+<a href="#events_actionHook::setMenuListResponse">actionHook::setMenuListResponse</a>
+</li>
+
+<li>
+<a href="#events_handleReqFuncs::404">handleReqFuncs::404</a>
+</li>
+
+<li>
+<a href="#events_handleReqFuncs::accessCheck">handleReqFuncs::accessCheck</a>
+</li>
+
+<li>
+<a href="#events_handleReqFuncs::common">handleReqFuncs::common</a>
+</li>
+
+<li>
+<a href="#events_handleReqFuncs::event">handleReqFuncs::event</a>
+</li>
+
+<li>
+<a href="#events_handleReqFuncs::image">handleReqFuncs::image</a>
+</li>
+
+<li>
+<a href="#events_handleReqFuncs::link">handleReqFuncs::link</a>
+</li>
+
+<li>
+<a href="#events_handleReqFuncs::location">handleReqFuncs::location</a>
+</li>
+
+<li>
+<a href="#events_handleReqFuncs::text">handleReqFuncs::text</a>
+</li>
+
+<li class="divider"></li>
+
+
+
+
+
+<li class="nav-header">Files</li>
+<ul><li>WechatSDK.php/<ul></ul></li></ul>
+<li class="divider"></li>
+
+</ul> </div>
+      </div>
+    </div>
+  </body>
+</html>
+<script type="text/javascript" src="../assets/js/jquery-1.8.2.min.js"></script>
+<script type="text/javascript"> if($('.prettyprint').length)$.getScript("https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js?lang=php"); </script>
