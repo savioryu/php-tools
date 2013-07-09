@@ -2,13 +2,13 @@
     "project": {
         "name": "WeChatSDK",
         "description": "WeChat Callback SDK for php",
-        "version": "0.5",
+        "version": "0.6",
         "logo": "http://admin.wechat.com/en_US/htmledition/images/logo.png",
-        "url": "https://www.github.com/zemzheng/wechat/"
+        "url": "https://github.com/zemzheng/php-tools/tree/master/WeChatSDK"
     },
     "files": {
-        "WechatSDK.php": {
-            "name": "WechatSDK.php",
+        "WeChatSDK.php": {
+            "name": "WeChatSDK.php",
             "modules": {},
             "classes": {
                 "WeChatSDK": 1
@@ -27,14 +27,14 @@
             "extensions": [],
             "plugin_for": [],
             "extension_for": [],
-            "file": "WechatSDK.php",
+            "file": "WeChatSDK.php",
             "line": 8,
             "description": "WeChat Callback API SDK"
         }
     },
     "classitems": [
         {
-            "file": "WechatSDK.php",
+            "file": "WeChatSDK.php",
             "line": 2,
             "author": "zemzheng@tencent.com / zemzheng@gmail.com",
             "fileoverview": "WeChat Callback SDK",
@@ -42,7 +42,7 @@
             "class": "WeChatSDK"
         },
         {
-            "file": "WechatSDK.php",
+            "file": "WeChatSDK.php",
             "line": 24,
             "itemtype": "method",
             "name": "__construct",
@@ -79,7 +79,7 @@
             "class": "WeChatSDK"
         },
         {
-            "file": "WechatSDK.php",
+            "file": "WeChatSDK.php",
             "line": 74,
             "itemtype": "method",
             "name": "accessDataPush",
@@ -90,7 +90,7 @@
             "class": "WeChatSDK"
         },
         {
-            "file": "WechatSDK.php",
+            "file": "WeChatSDK.php",
             "line": 99,
             "itemtype": "event",
             "name": "handleReqFuncs::commonBefore",
@@ -101,7 +101,7 @@
             "class": "WeChatSDK"
         },
         {
-            "file": "WechatSDK.php",
+            "file": "WeChatSDK.php",
             "line": 122,
             "itemtype": "event",
             "name": "handleReqFuncs::common",
@@ -112,7 +112,7 @@
             "class": "WeChatSDK"
         },
         {
-            "file": "WechatSDK.php",
+            "file": "WeChatSDK.php",
             "line": 141,
             "itemtype": "event",
             "name": "handleReqFuncs::text",
@@ -127,7 +127,7 @@
             "class": "WeChatSDK"
         },
         {
-            "file": "WechatSDK.php",
+            "file": "WeChatSDK.php",
             "line": 159,
             "itemtype": "event",
             "name": "handleReqFuncs::image",
@@ -142,7 +142,7 @@
             "class": "WeChatSDK"
         },
         {
-            "file": "WechatSDK.php",
+            "file": "WeChatSDK.php",
             "line": 177,
             "itemtype": "event",
             "name": "handleReqFuncs::location",
@@ -157,7 +157,7 @@
             "class": "WeChatSDK"
         },
         {
-            "file": "WechatSDK.php",
+            "file": "WeChatSDK.php",
             "line": 198,
             "itemtype": "event",
             "name": "handleReqFuncs::link",
@@ -172,7 +172,7 @@
             "class": "WeChatSDK"
         },
         {
-            "file": "WechatSDK.php",
+            "file": "WeChatSDK.php",
             "line": 218,
             "itemtype": "event",
             "name": "handleReqFuncs::event",
@@ -187,7 +187,7 @@
             "class": "WeChatSDK"
         },
         {
-            "file": "WechatSDK.php",
+            "file": "WeChatSDK.php",
             "line": 239,
             "itemtype": "event",
             "name": "handleReqFuncs::accessCheck",
@@ -195,7 +195,7 @@
             "class": "WeChatSDK"
         },
         {
-            "file": "WechatSDK.php",
+            "file": "WeChatSDK.php",
             "line": 245,
             "itemtype": "event",
             "name": "handleReqFuncs::accessCheckSuccess",
@@ -206,7 +206,7 @@
             "class": "WeChatSDK"
         },
         {
-            "file": "WechatSDK.php",
+            "file": "WeChatSDK.php",
             "line": 270,
             "itemtype": "event",
             "name": "handleReqFuncs::404",
@@ -214,7 +214,7 @@
             "class": "WeChatSDK"
         },
         {
-            "file": "WechatSDK.php",
+            "file": "WeChatSDK.php",
             "line": 281,
             "itemtype": "method",
             "name": "sendRichMsg",
@@ -247,7 +247,7 @@
             "class": "WeChatSDK"
         },
         {
-            "file": "WechatSDK.php",
+            "file": "WeChatSDK.php",
             "line": 369,
             "itemtype": "method",
             "name": "sendMusic",
@@ -280,7 +280,7 @@
             "class": "WeChatSDK"
         },
         {
-            "file": "WechatSDK.php",
+            "file": "WeChatSDK.php",
             "line": 423,
             "itemtype": "method",
             "name": "sendText",
@@ -313,7 +313,7 @@
             "class": "WeChatSDK"
         },
         {
-            "file": "WechatSDK.php",
+            "file": "WeChatSDK.php",
             "line": 456,
             "itemtype": "event",
             "name": "actionHook::beforeSend",
@@ -324,7 +324,7 @@
             "class": "WeChatSDK"
         },
         {
-            "file": "WechatSDK.php",
+            "file": "WeChatSDK.php",
             "line": 539,
             "itemtype": "method",
             "name": "getMenuList",
@@ -340,7 +340,7 @@
             "class": "WeChatSDK"
         },
         {
-            "file": "WechatSDK.php",
+            "file": "WeChatSDK.php",
             "line": 564,
             "itemtype": "method",
             "name": "delMenuList",
@@ -356,7 +356,7 @@
             "class": "WeChatSDK"
         },
         {
-            "file": "WechatSDK.php",
+            "file": "WeChatSDK.php",
             "line": 588,
             "itemtype": "event",
             "name": "actionHook::delMenuListResponse",
@@ -367,7 +367,7 @@
             "class": "WeChatSDK"
         },
         {
-            "file": "WechatSDK.php",
+            "file": "WeChatSDK.php",
             "line": 615,
             "itemtype": "method",
             "name": "setMenuByJson",
@@ -386,7 +386,7 @@
             "class": "WeChatSDK"
         },
         {
-            "file": "WechatSDK.php",
+            "file": "WeChatSDK.php",
             "line": 686,
             "itemtype": "event",
             "name": "actionHook::setMenuListResponse",
@@ -397,7 +397,7 @@
             "class": "WeChatSDK"
         },
         {
-            "file": "WechatSDK.php",
+            "file": "WeChatSDK.php",
             "line": 785,
             "itemtype": "method",
             "name": "post",
@@ -421,7 +421,7 @@
             "class": "WeChatSDK"
         },
         {
-            "file": "WechatSDK.php",
+            "file": "WeChatSDK.php",
             "line": 823,
             "itemtype": "method",
             "name": "get",
