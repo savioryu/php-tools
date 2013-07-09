@@ -3,12 +3,12 @@
         "name": "WeChatSDK",
         "description": "WeChat Callback SDK for php",
         "version": "0.5",
-        "logo": "http://admin.wechat.com/en_US/htmledition/images/logo147d79.png",
+        "logo": "http://admin.wechat.com/en_US/htmledition/images/logo.png",
         "url": "https://www.github.com/zemzheng/php-tools/WeChatSDK/"
     },
     "files": {
-        "WechatSDK.php": {
-            "name": "WechatSDK.php",
+        "WeChatSDK.php": {
+            "name": "WeChatSDK.php",
             "modules": {},
             "classes": {
                 "WeChatSDK": 1
@@ -27,14 +27,14 @@
             "extensions": [],
             "plugin_for": [],
             "extension_for": [],
-            "file": "WechatSDK.php",
+            "file": "WeChatSDK.php",
             "line": 8,
             "description": "WeChat Callback API SDK"
         }
     },
     "classitems": [
         {
-            "file": "WechatSDK.php",
+            "file": "WeChatSDK.php",
             "line": 2,
             "author": "zemzheng@tencent.com / zemzheng@gmail.com",
             "fileoverview": "WeChat Callback SDK",
@@ -42,7 +42,7 @@
             "class": "WeChatSDK"
         },
         {
-            "file": "WechatSDK.php",
+            "file": "WeChatSDK.php",
             "line": 24,
             "itemtype": "method",
             "name": "__construct",
@@ -79,7 +79,7 @@
             "class": "WeChatSDK"
         },
         {
-            "file": "WechatSDK.php",
+            "file": "WeChatSDK.php",
             "line": 74,
             "itemtype": "method",
             "name": "accessDataPush",
@@ -90,8 +90,19 @@
             "class": "WeChatSDK"
         },
         {
-            "file": "WechatSDK.php",
+            "file": "WeChatSDK.php",
             "line": 99,
+            "itemtype": "event",
+            "name": "handleReqFuncs::commonBefore",
+            "description": "Trigger when receive push data. Before all other handle hook\n<br/> It can be handleReqFuncs::[text/image/location/link/event]",
+            "example": [
+                "\n<pre>\n// How to set it?\nnew WeChatSDK(\n   $APPSECRET, \n   $APPID,\n   $token,\n   array(\n     'commonBefore' => \n   ),\n   $actionHookFuncs\n);\n</pre>"
+            ],
+            "class": "WeChatSDK"
+        },
+        {
+            "file": "WeChatSDK.php",
+            "line": 122,
             "itemtype": "event",
             "name": "handleReqFuncs::common",
             "description": "Trigger when receive push data. \n<br/> It can be handleReqFuncs::[text/image/location/link/event]",
@@ -101,8 +112,8 @@
             "class": "WeChatSDK"
         },
         {
-            "file": "WechatSDK.php",
-            "line": 118,
+            "file": "WeChatSDK.php",
+            "line": 141,
             "itemtype": "event",
             "name": "handleReqFuncs::text",
             "description": "Trigger when receive text data push",
@@ -116,8 +127,8 @@
             "class": "WeChatSDK"
         },
         {
-            "file": "WechatSDK.php",
-            "line": 136,
+            "file": "WeChatSDK.php",
+            "line": 159,
             "itemtype": "event",
             "name": "handleReqFuncs::image",
             "description": "Trigger when receive image data push",
@@ -131,8 +142,8 @@
             "class": "WeChatSDK"
         },
         {
-            "file": "WechatSDK.php",
-            "line": 154,
+            "file": "WeChatSDK.php",
+            "line": 177,
             "itemtype": "event",
             "name": "handleReqFuncs::location",
             "description": "Trigger when receive image data push",
@@ -146,8 +157,8 @@
             "class": "WeChatSDK"
         },
         {
-            "file": "WechatSDK.php",
-            "line": 175,
+            "file": "WeChatSDK.php",
+            "line": 198,
             "itemtype": "event",
             "name": "handleReqFuncs::link",
             "description": "Trigger when receive link data push",
@@ -161,8 +172,8 @@
             "class": "WeChatSDK"
         },
         {
-            "file": "WechatSDK.php",
-            "line": 195,
+            "file": "WeChatSDK.php",
+            "line": 218,
             "itemtype": "event",
             "name": "handleReqFuncs::event",
             "description": "Trigger when receive event data push",
@@ -176,24 +187,35 @@
             "class": "WeChatSDK"
         },
         {
-            "file": "WechatSDK.php",
-            "line": 216,
+            "file": "WeChatSDK.php",
+            "line": 239,
             "itemtype": "event",
             "name": "handleReqFuncs::accessCheck",
             "description": "Trigger when request CallBack API Verification",
             "class": "WeChatSDK"
         },
         {
-            "file": "WechatSDK.php",
-            "line": 225,
+            "file": "WeChatSDK.php",
+            "line": 245,
+            "itemtype": "event",
+            "name": "handleReqFuncs::accessCheckSuccess",
+            "description": "Trigger when check signature success. Before send 'echostr'",
+            "example": [
+                "\n<pre>\n// How to set it?\nnew WeChatSDK(\n   $APPSECRET, \n   $APPID,\n   $token,\n   array(\n     'accessCheckSuccess' => \n   ),\n   $actionHookFuncs\n);\n</pre>"
+            ],
+            "class": "WeChatSDK"
+        },
+        {
+            "file": "WeChatSDK.php",
+            "line": 270,
             "itemtype": "event",
             "name": "handleReqFuncs::404",
             "description": "Unknow Request Handler.",
             "class": "WeChatSDK"
         },
         {
-            "file": "WechatSDK.php",
-            "line": 236,
+            "file": "WeChatSDK.php",
+            "line": 281,
             "itemtype": "method",
             "name": "sendRichMsg",
             "static": 1,
@@ -225,8 +247,8 @@
             "class": "WeChatSDK"
         },
         {
-            "file": "WechatSDK.php",
-            "line": 324,
+            "file": "WeChatSDK.php",
+            "line": 369,
             "itemtype": "method",
             "name": "sendMusic",
             "static": 1,
@@ -243,7 +265,7 @@
                 },
                 {
                     "name": "$_music",
-                    "description": ": Musci info list\n<pre>\n                   array(\n                     'title'  => # {String} => music title\n                     'desc'   => # {String} => music description\n                     'url'    => # {String} => music url\n                     'hq_url' => # {String} => high quality music url， default = $_music['music_url']\n                   )\n</pre>",
+                    "description": ": Musci info list\n<pre>\n                   array(\n                     'title'  => # {String} => music title\n                     'desc'   => # {String} => music description\n                     'url'    => # {String} => music url\n                     'hq_url' => # {String} => high quality music url, default = $_music['url']\n                   )\n</pre>",
                     "type": "Array"
                 },
                 {
@@ -258,8 +280,8 @@
             "class": "WeChatSDK"
         },
         {
-            "file": "WechatSDK.php",
-            "line": 378,
+            "file": "WeChatSDK.php",
+            "line": 423,
             "itemtype": "method",
             "name": "sendText",
             "static": 1,
@@ -291,8 +313,8 @@
             "class": "WeChatSDK"
         },
         {
-            "file": "WechatSDK.php",
-            "line": 411,
+            "file": "WeChatSDK.php",
+            "line": 456,
             "itemtype": "event",
             "name": "actionHook::beforeSend",
             "description": "before send msg to our customer, you can log/stop it by this event.<br/>",
@@ -302,8 +324,8 @@
             "class": "WeChatSDK"
         },
         {
-            "file": "WechatSDK.php",
-            "line": 488,
+            "file": "WeChatSDK.php",
+            "line": 539,
             "itemtype": "method",
             "name": "getMenuList",
             "static": 1,
@@ -318,8 +340,8 @@
             "class": "WeChatSDK"
         },
         {
-            "file": "WechatSDK.php",
-            "line": 515,
+            "file": "WeChatSDK.php",
+            "line": 564,
             "itemtype": "method",
             "name": "delMenuList",
             "static": 1,
@@ -334,8 +356,8 @@
             "class": "WeChatSDK"
         },
         {
-            "file": "WechatSDK.php",
-            "line": 539,
+            "file": "WeChatSDK.php",
+            "line": 588,
             "itemtype": "event",
             "name": "actionHook::delMenuListResponse",
             "description": "Trigger once it got the response after try to delete custom menu",
@@ -345,8 +367,8 @@
             "class": "WeChatSDK"
         },
         {
-            "file": "WechatSDK.php",
-            "line": 566,
+            "file": "WeChatSDK.php",
+            "line": 615,
             "itemtype": "method",
             "name": "setMenuByJson",
             "static": 1,
@@ -364,8 +386,8 @@
             "class": "WeChatSDK"
         },
         {
-            "file": "WechatSDK.php",
-            "line": 632,
+            "file": "WeChatSDK.php",
+            "line": 686,
             "itemtype": "event",
             "name": "actionHook::setMenuListResponse",
             "description": "Trigger once it got the response after try to set custom menu",
@@ -373,20 +395,54 @@
                 "\n<pre>\n// How to set it?\nnew WeChatSDK(\n   $APPSECRET, \n   $APPID,\n   $token,\n   $handleReqFuncsFuncs,\n   array(\n     'setMenuListResponse' => # {String|Function} the callable function or function name.\n   )\n);\n</pre>"
             ],
             "class": "WeChatSDK"
-        }
-    ],
-    "warnings": [
-        {
-            "message": "unknown tag: fileoverview",
-            "line": " WechatSDK.php:2"
         },
         {
-            "message": "unknown tag: version",
-            "line": " WechatSDK.php:2"
+            "file": "WeChatSDK.php",
+            "line": 785,
+            "itemtype": "method",
+            "name": "post",
+            "static": 1,
+            "params": [
+                {
+                    "name": "$url",
+                    "description": "URL to post data to",
+                    "type": "String"
+                },
+                {
+                    "name": "$data",
+                    "description": "Data to be post",
+                    "type": "String|array"
+                }
+            ],
+            "return": {
+                "description": "Response string or false for failure.",
+                "type": "String|boolen"
+            },
+            "class": "WeChatSDK"
         },
         {
-            "message": "Missing item type",
-            "line": " WechatSDK.php:2"
+            "file": "WeChatSDK.php",
+            "line": 823,
+            "itemtype": "method",
+            "name": "get",
+            "static": 1,
+            "params": [
+                {
+                    "name": "$url",
+                    "description": "URL to post data to",
+                    "type": "String"
+                },
+                {
+                    "name": "$data",
+                    "description": "Data to be post",
+                    "type": "String|array"
+                }
+            ],
+            "return": {
+                "description": "Response string or false for failure.",
+                "type": "String|boolen"
+            },
+            "class": "WeChatSDK"
         }
     ]
 }

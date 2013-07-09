@@ -1,58 +1,124 @@
 <!DOCTYPE html>
-<html>
-  <head>
+<html lang="en">
+<head>
     <meta charset="utf-8">
-    <title>WechatSDK.php - WeChatSDK</title>
-    <link rel="stylesheet" href="../assets/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="../assets/css/bootstrap-responsive.min.css" />
-  </head>
-  <body>
+    <title>WeChatSDK.php - WeChatSDK</title>
+    <link rel="stylesheet" href="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;3.5.1&#x2F;build&#x2F;cssgrids&#x2F;cssgrids-min.css">
+    <link rel="stylesheet" href="..&#x2F;assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="..&#x2F;assets/css/main.css" id="site_styles">
+    <link rel="shortcut icon" type="image/png" href="..&#x2F;assets/favicon.png">
+    <script src="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;combo?3.5.1&#x2F;build&#x2F;yui&#x2F;yui-min.js"></script>
+</head>
+<body class="yui3-skin-sam">
 
-    <div class="container-fluid">
-      <div id="header">
-        <h1 class="logo">
-          <a href="../index.html">
-            <img src="http://admin.wechat.com/en_US/htmledition/images/logo147d79.png" title="WeChatSDK"/>
-          </a></h1>
-        <div class="version">
-          <em>API Docs for: 0.5</em>
+<div id="doc">
+    <div id="hd" class="yui3-g header">
+        <div class="yui3-u-3-4">
+            
+                <h1><img src="http:&#x2F;&#x2F;admin.wechat.com&#x2F;en_US&#x2F;htmledition&#x2F;images&#x2F;logo.png" title="WeChatSDK"></h1>
+            
         </div>
-      </div>
+        <div class="yui3-u-1-4 version">
+            <em>API Docs for: 0.5</em>
+        </div>
+    </div>
+    <div id="bd" class="yui3-g">
 
-      <div class="row-fluid">
-        <div id="main" class="span9"> <div class="content"><h2>WechatSDK.php</h2><pre class="code prettyprint linenums">&lt;?PHP
-/**
- * @author zemzheng@tencent.com / zemzheng@gmail.com
+        <div class="yui3-u-1-4">
+            <div id="docs-sidebar" class="sidebar apidocs">
+                <div id="api-list">
+    <h2 class="off-left">APIs</h2>
+    <div id="api-tabview" class="tabview">
+        <ul class="tabs">
+            <li><a href="#api-classes">Classes</a></li>
+            <li><a href="#api-modules">Modules</a></li>
+        </ul>
+
+        <div id="api-tabview-filter">
+            <input type="search" id="api-filter" placeholder="Type to filter APIs">
+        </div>
+
+        <div id="api-tabview-panel">
+            <ul id="api-classes" class="apis classes">
+            
+                <li><a href="..&#x2F;classes/WeChatSDK.html">WeChatSDK</a></li>
+            
+            </ul>
+
+            <ul id="api-modules" class="apis modules">
+            
+            </ul>
+        </div>
+    </div>
+</div>
+
+            </div>
+        </div>
+        <div class="yui3-u-3-4">
+                <div id="api-options">
+        Show:
+        <label for="api-show-inherited">
+            <input type="checkbox" id="api-show-inherited" checked>
+            Inherited
+        </label>
+
+        <label for="api-show-protected">
+            <input type="checkbox" id="api-show-protected">
+            Protected
+        </label>
+
+        <label for="api-show-private">
+            <input type="checkbox" id="api-show-private">
+            Private
+        </label>
+        <label for="api-show-deprecated">
+            <input type="checkbox" id="api-show-deprecated">
+            Deprecated
+        </label>
+
+    </div>
+
+
+            <div class="apidocs">
+                <div id="docs-main">
+                    <div class="content">
+                        <h1 class="file-heading">File: WeChatSDK.php</h1>
+
+<div class="file">
+    <pre class="code prettyprint linenums">
+&lt;?PHP
+&#x2F;**
+ * @author zemzheng@tencent.com &#x2F; zemzheng@gmail.com
  * @fileOverview WeChat Callback SDK
  * @version 0.5
- */
+ *&#x2F;
 
-/**
+&#x2F;**
  * @class WeChatSDK
  * @description WeChat Callback API SDK
- */
+ *&#x2F;
 class WeChatSDK{
   # {{{ SETTING ==========================================================
-  private static $_api_url_root = &#x27;https://api.weixin.qq.com&#x27;;
+  private static $_api_url_root = &#x27;https:&#x2F;&#x2F;api.weixin.qq.com&#x27;;
   private static $_errList = array(
     ## en_US
-    ## http://admin.wechat.com/wiki/index.php?title=Return_Codes
-    &#x27;-1&#x27; =&gt; &#x27;System busy&#x27;, &#x27;0&#x27; =&gt; &#x27;Request succeeded&#x27;, &#x27;40001&#x27; =&gt; &#x27;Verification failed&#x27;, &#x27;40002&#x27; =&gt; &#x27;Invalid certificate type&#x27;, &#x27;40003&#x27; =&gt; &#x27;Invalid OPEN ID&#x27;, &#x27;40004&#x27; =&gt; &#x27;Invalid media file type&#x27;, &#x27;40005&#x27; =&gt; &#x27;Invalid file type&#x27;, &#x27;40006&#x27; =&gt; &#x27;Invalid file size&#x27;, &#x27;40007&#x27; =&gt; &#x27;Invalid media file ID&#x27;, &#x27;40008&#x27; =&gt; &#x27;Invalid message type&#x27;, &#x27;40009&#x27; =&gt; &#x27;Invalid image file size&#x27;, &#x27;40010&#x27; =&gt; &#x27;Invalid audio file size&#x27;, &#x27;40011&#x27; =&gt; &#x27;Invalid video file size&#x27;, &#x27;40012&#x27; =&gt; &#x27;Invalid thumbnail file size&#x27;, &#x27;40013&#x27; =&gt; &#x27;Invalid APP ID&#x27;, &#x27;41001&#x27; =&gt; &#x27;Parameter missing: access_token&#x27;, &#x27;41002&#x27; =&gt; &#x27;Parameter missing: appid&#x27;, &#x27;41003&#x27; =&gt; &#x27;Parameter missing: refresh_token&#x27;, &#x27;41004&#x27; =&gt; &#x27;Parameter missing: secret&#x27;, &#x27;41005&#x27; =&gt; &#x27;Multimedia file data missing&#x27;, &#x27;41006&#x27; =&gt; &#x27;Parameter missing: media_id&#x27;, &#x27;42001&#x27; =&gt; &#x27;access_token timed out&#x27;, &#x27;43001&#x27; =&gt; &#x27;GET request required&#x27;, &#x27;43002&#x27; =&gt; &#x27;POST request required&#x27;, &#x27;43003&#x27; =&gt; &#x27;HTTPS request required&#x27;, &#x27;44001&#x27; =&gt; &#x27;Multimedia file is empty&#x27;, &#x27;44002&#x27; =&gt; &#x27;POST package is empty&#x27;, &#x27;44003&#x27; =&gt; &#x27;Rich media message is empty&#x27;, &#x27;45001&#x27; =&gt; &#x27;Error source: multimedia file size&#x27;, &#x27;45002&#x27; =&gt; &#x27;Message contents too long&#x27;, &#x27;45003&#x27; =&gt; &#x27;Title too long&#x27;, &#x27;45004&#x27; =&gt; &#x27;Description too long&#x27;, &#x27;45005&#x27; =&gt; &#x27;URL too long&#x27;, &#x27;45006&#x27; =&gt; &#x27;Image URL too long&#x27;, &#x27;45007&#x27; =&gt; &#x27;Audio play time over limit&#x27;, &#x27;45008&#x27; =&gt; &#x27;Rich media messages over limit&#x27;, &#x27;45009&#x27; =&gt; &#x27;Error source: interface call&#x27;, &#x27;46001&#x27; =&gt; &#x27;Media data missing&#x27;, &#x27;47001&#x27; =&gt; &#x27;Error while extracting JSON/XML contents&#x27;
+    ## http:&#x2F;&#x2F;admin.wechat.com&#x2F;wiki&#x2F;index.php?title=Return_Codes
+    &#x27;-1&#x27; =&gt; &#x27;System busy&#x27;, &#x27;0&#x27; =&gt; &#x27;Request succeeded&#x27;, &#x27;40001&#x27; =&gt; &#x27;Verification failed&#x27;, &#x27;40002&#x27; =&gt; &#x27;Invalid certificate type&#x27;, &#x27;40003&#x27; =&gt; &#x27;Invalid OPEN ID&#x27;, &#x27;40004&#x27; =&gt; &#x27;Invalid media file type&#x27;, &#x27;40005&#x27; =&gt; &#x27;Invalid file type&#x27;, &#x27;40006&#x27; =&gt; &#x27;Invalid file size&#x27;, &#x27;40007&#x27; =&gt; &#x27;Invalid media file ID&#x27;, &#x27;40008&#x27; =&gt; &#x27;Invalid message type&#x27;, &#x27;40009&#x27; =&gt; &#x27;Invalid image file size&#x27;, &#x27;40010&#x27; =&gt; &#x27;Invalid audio file size&#x27;, &#x27;40011&#x27; =&gt; &#x27;Invalid video file size&#x27;, &#x27;40012&#x27; =&gt; &#x27;Invalid thumbnail file size&#x27;, &#x27;40013&#x27; =&gt; &#x27;Invalid APP ID&#x27;, &#x27;41001&#x27; =&gt; &#x27;Parameter missing: access_token&#x27;, &#x27;41002&#x27; =&gt; &#x27;Parameter missing: appid&#x27;, &#x27;41003&#x27; =&gt; &#x27;Parameter missing: refresh_token&#x27;, &#x27;41004&#x27; =&gt; &#x27;Parameter missing: secret&#x27;, &#x27;41005&#x27; =&gt; &#x27;Multimedia file data missing&#x27;, &#x27;41006&#x27; =&gt; &#x27;Parameter missing: media_id&#x27;, &#x27;42001&#x27; =&gt; &#x27;access_token timed out&#x27;, &#x27;43001&#x27; =&gt; &#x27;GET request required&#x27;, &#x27;43002&#x27; =&gt; &#x27;POST request required&#x27;, &#x27;43003&#x27; =&gt; &#x27;HTTPS request required&#x27;, &#x27;44001&#x27; =&gt; &#x27;Multimedia file is empty&#x27;, &#x27;44002&#x27; =&gt; &#x27;POST package is empty&#x27;, &#x27;44003&#x27; =&gt; &#x27;Rich media message is empty&#x27;, &#x27;45001&#x27; =&gt; &#x27;Error source: multimedia file size&#x27;, &#x27;45002&#x27; =&gt; &#x27;Message contents too long&#x27;, &#x27;45003&#x27; =&gt; &#x27;Title too long&#x27;, &#x27;45004&#x27; =&gt; &#x27;Description too long&#x27;, &#x27;45005&#x27; =&gt; &#x27;URL too long&#x27;, &#x27;45006&#x27; =&gt; &#x27;Image URL too long&#x27;, &#x27;45007&#x27; =&gt; &#x27;Audio play time over limit&#x27;, &#x27;45008&#x27; =&gt; &#x27;Rich media messages over limit&#x27;, &#x27;45009&#x27; =&gt; &#x27;Error source: interface call&#x27;, &#x27;46001&#x27; =&gt; &#x27;Media data missing&#x27;, &#x27;47001&#x27; =&gt; &#x27;Error while extracting JSON&#x2F;XML contents&#x27;
   );
-  # / SETTING }}} ========================================================
+  # &#x2F; SETTING }}} ========================================================
 
   # {{{ METHODS ==========================================================
 
-  /**
+  &#x2F;**
    *
    * @method __construct
    * @param {String} $APPSECRET           : APPSECRET
    * @param {String} $APPID               : APPID
    * @param {String} $_token              : The Token set by YOU
-   * @param {Array} $_handleReqFuncs      : [Selectable] Functions, for handle Request
+   * @param {Array}  $_handleReqFuncs      : [Selectable] Functions, for handle Request
    *  &lt;pre&gt;
    *    array(
-   *      &#x27;common&#x27;      =&gt; function($postObj){},  # Handler for all data/event push request. [handleReqFuncs::common]
+   *      &#x27;common&#x27;      =&gt; function($postObj){},  # Handler for all data&#x2F;event push request. [handleReqFuncs::common]
    *
    *        &#x27;text&#x27;        =&gt; function($postObj){},  # Handler for text           push request. [handleReqFuncs::text]
    *        &#x27;image&#x27;       =&gt; function($postObj){},  # Handler for image          push request. [handleReqFuncs::image]
@@ -63,23 +129,23 @@ class WeChatSDK{
    *      &#x27;accessCheck&#x27; =&gt; function(){},          # Handler for CallBack API Verification [handleReqFuncs::accessCheck]
    *      &#x27;404&#x27;         =&gt; function(){},          # Handler for other case                [handleReqFuncs::404]
    *    )
-   *  &lt;/pre&gt;
-   * @param {Array} $_actionHookFuncs     : [Selectable] Common Functions for each instance
+   *  &lt;&#x2F;pre&gt;
+   * @param {Array}  $_actionHookFuncs     : [Selectable] Common Functions for each instance
    * &lt;pre&gt;
    *    array(
    *      &#x27;beforeSend&#x27; =&gt; function($msg){} # @see event actionHook::beforeSend
    *    )
-   * &lt;/pre&gt;
+   * &lt;&#x2F;pre&gt;
    * @example
    * &lt;pre&gt;
-   * // Your codes here...
+   * &#x2F;&#x2F; Your codes here...
    * $wechat = new WeChatSDK(
    *   $APPSECRET, $APPID, $_token,
    *   $_handleReqFuncs     ,
    *   $_actionHookFuncs
    * );
-   * &lt;/pre&gt;
-   */
+   * &lt;&#x2F;pre&gt;
+   *&#x2F;
   public function __construct(
     $APPSECRET, $APPID, $_token, 
     $_handleReqFuncs      = array(),
@@ -93,21 +159,24 @@ class WeChatSDK{
     self::$_actionHookFuncs = $_actionHookFuncs;
   }
 
-  /**
+  &#x2F;**
    * @method accessDataPush
    * @description Start to handle current HTTP Request.
    * @example
    * &lt;pre&gt;
-   * // Your codes here ...
+   * &#x2F;&#x2F; Your codes here ...
    * $wechat = new WeChatSDK($APPSECRET, $APPID, $_token,
    *  $_handleReqFuncs     ,
    *   $_actionHookFuncs
    * );
    * $wechat-&gt;accessDataPush();
-   * &lt;/pre&gt;
-   */
+   * &lt;&#x2F;pre&gt;
+   *&#x2F;
   public function accessDataPush(){
     if(isset($GLOBALS[&quot;HTTP_RAW_POST_DATA&quot;])){
+      if(!$this-&gt;_checkSignature()){
+        return;
+      }
       $postObj = simplexml_load_string(
         $GLOBALS[&quot;HTTP_RAW_POST_DATA&quot;],
         &#x27;SimpleXMLElement&#x27;, 
@@ -115,16 +184,36 @@ class WeChatSDK{
       );
       $postObj = $this-&gt;_handlePostObj($postObj);
 
-      // Call Special Request Handle Function 
-      $this-&gt;_runHandleReqFuncByType($postObj[&#x27;type&#x27;], $postObj);
-      // Call Common Request Handle Function
-      /**
-       * @event handleReqFuncs::common
-       * @description Trigger when receive push data. 
-       * &lt;br/&gt; It can be handleReqFuncs::[text/image/location/link/event]
+      &#x2F;**
+       * @event handleReqFuncs::commonBefore
+       * @description Trigger when receive push data. Before all other handle hook
+       * &lt;br&#x2F;&gt; It can be handleReqFuncs::[text&#x2F;image&#x2F;location&#x2F;link&#x2F;event]
        * @example
        * &lt;pre&gt;
-       * // How to set it?
+       * &#x2F;&#x2F; How to set it?
+       * new WeChatSDK(
+       *    $APPSECRET, 
+       *    $APPID,
+       *    $token,
+       *    array(
+       *      &#x27;commonBefore&#x27; =&gt; 
+       *    ),
+       *    $actionHookFuncs
+       * );
+       * &lt;&#x2F;pre&gt;
+        *&#x2F;
+      $this-&gt;_runHandleReqFuncByType(&#x27;commonBefore&#x27;, $postObj);
+
+      &#x2F;&#x2F; Call Special Request Handle Function 
+      $this-&gt;_runHandleReqFuncByType($postObj[&#x27;type&#x27;], $postObj);
+      &#x2F;&#x2F; Call Common Request Handle Function
+      &#x2F;**
+       * @event handleReqFuncs::common
+       * @description Trigger when receive push data. 
+       * &lt;br&#x2F;&gt; It can be handleReqFuncs::[text&#x2F;image&#x2F;location&#x2F;link&#x2F;event]
+       * @example
+       * &lt;pre&gt;
+       * &#x2F;&#x2F; How to set it?
        * new WeChatSDK(
        *    $APPSECRET, 
        *    $APPID,
@@ -134,10 +223,10 @@ class WeChatSDK{
        *    ),
        *    $actionHookFuncs
        * );
-       * &lt;/pre&gt;
-        */
+       * &lt;&#x2F;pre&gt;
+        *&#x2F;
 
-      /**
+      &#x2F;**
        * @event handleReqFuncs::text
        * @description Trigger when receive text data push
        * @param {Array} Text Msg Data
@@ -152,10 +241,10 @@ class WeChatSDK{
        *      # special
        *      &#x27;text&#x27; =&gt; # {String} : Msg string
        *    )
-       * &lt;/pre&gt;
-       */
+       * &lt;&#x2F;pre&gt;
+       *&#x2F;
 
-      /**
+      &#x2F;**
        * @event handleReqFuncs::image
        * @description Trigger when receive image data push
        * @param {Array} image Msg Data
@@ -170,10 +259,10 @@ class WeChatSDK{
        *      # special
        *      &#x27;url&#x27;  =&gt; # {String} image url
        *    )
-       * &lt;/pre&gt;
-       */
+       * &lt;&#x2F;pre&gt;
+       *&#x2F;
 
-      /**
+      &#x2F;**
        * @event handleReqFuncs::location
        * @description Trigger when receive image data push
        * @param {Array} location Msg Data
@@ -191,10 +280,10 @@ class WeChatSDK{
        *      &#x27;S&#x27; =&gt; # {float}  : Scale
        *      &#x27;I&#x27; =&gt; # {String} : Location info
        *    )
-       * &lt;/pre&gt;
-       */
+       * &lt;&#x2F;pre&gt;
+       *&#x2F;
 
-      /**
+      &#x2F;**
        * @event handleReqFuncs::link
        * @description Trigger when receive link data push
        * @param {Array} link Msg Data
@@ -211,10 +300,10 @@ class WeChatSDK{
        *      &#x27;desc&#x27; =&gt;  # {String} : Link description
        *      &#x27;url&#x27; =&gt;   # {String} : Link url
        *    )
-       * &lt;/pre&gt;
-       */
+       * &lt;&#x2F;pre&gt;
+       *&#x2F;
 
-      /**
+      &#x2F;**
        * @event handleReqFuncs::event
        * @description Trigger when receive event data push
        * @param {Array} event Msg Data
@@ -230,38 +319,60 @@ class WeChatSDK{
        *      &#x27;event&#x27; =&gt; # {String} : event type
        *      &#x27;key&#x27;   =&gt; # {String} : event key
        *    )
-       * &lt;/pre&gt;
-       */
+       * &lt;&#x2F;pre&gt;
+       *&#x2F;
       $this-&gt;_runHandleReqFuncByType(&#x27;common&#x27;, $postObj);
 
     } else if(isset($_GET[&#x27;echostr&#x27;])) {
-      /**
+      &#x2F;**
        * @event handleReqFuncs::accessCheck
        * @description Trigger when request CallBack API Verification 
-       */
+       *&#x2F;
       $this-&gt;_runHandleReqFuncByType(&#x27;accessCheck&#x27;);
       if($this-&gt;_checkSignature()){
-        echo $_GET[&#x27;echostr&#x27;];
+        &#x2F;**
+         * @event handleReqFuncs::accessCheckSuccess
+         * @description Trigger when check signature success. Before send &#x27;echostr&#x27;
+         * @example
+         * &lt;pre&gt;
+         * &#x2F;&#x2F; How to set it?
+         * new WeChatSDK(
+         *    $APPSECRET, 
+         *    $APPID,
+         *    $token,
+         *    array(
+         *      &#x27;accessCheckSuccess&#x27; =&gt; 
+         *    ),
+         *    $actionHookFuncs
+         * );
+         * &lt;&#x2F;pre&gt;
+        *&#x2F;
+        $this-&gt;_runHandleReqFuncByType(&#x27;accessCheckSuccess&#x27;);
+        &#x2F;&#x2F; avoid of xss
+        if (!headers_sent()){
+          header(&#x27;Content-Type: text&#x2F;plain&#x27;);
+        }
+        echo preg_replace(&#x27;&#x2F;[^a-z0-9]&#x2F;i&#x27;, &#x27;&#x27;, $_GET[&#x27;echostr&#x27;]);
       }
     } else {
-      /**
+      &#x2F;**
        * @event handleReqFuncs::404
        * @description Unknow Request Handler.              
-       */
+       *&#x2F;
       if( !$this-&gt;_runHandleReqFuncByType(&#x27;404&#x27;) ){
-        header(&#x27;HTTP/1.1 404 Not Found&#x27;);
+        header(&#x27;HTTP&#x2F;1.1 404 Not Found&#x27;);
         header(&#x27;Status: 404 Not Found&#x27;);
       }
     }
   }
 
-  /**
+  &#x2F;**
    * @method sendRichMsg
    * @static
    * @param {String} $to   : id, who will get the msg
    * @param {String} $from : id, who sent the msg
-   * @param {Array} $list  : rich msg list. less then 10 items.
-   * &lt;strong&gt;If you pass 10+ msg in, only 10 before will be send.&lt;/strong&gt;
+   * @param {Array}  $list  : rich msg list. less then 10 items.
+   * &lt;strong&gt;If you pass 10+ msg in, only 10 before will be send.&lt;&#x2F;strong&gt;
    * &lt;pre&gt;
    *          array(
    *            array(
@@ -272,32 +383,32 @@ class WeChatSDK{
    *            ),
    *            ...
    *          )
-   * &lt;/pre&gt;
+   * &lt;&#x2F;pre&gt;
    * @param {bool} $flag   : Started this msg [default = false]
    * @example
    * &lt;pre&gt;
-   * // Your codes here...
+   * &#x2F;&#x2F; Your codes here...
    * $handleText = function($postObj){
    *    WeChatSDK::sendRichMsg( $postObj[&#x27;from&#x27;], $postObj[&#x27;to&#x27;], array(
    *      array(
    *              &#x27;title&#x27; =&gt; &#x27;title 1&#x27;,
    *              &#x27;desc&#x27;  =&gt; &#x27;desc 1&#x27;,
-   *              &#x27;image&#x27; =&gt; &#x27;http://localhost/image1&#x27;,
-   *              &#x27;url&#x27;   =&gt; &#x27;http://localhost/url1&#x27;
+   *              &#x27;image&#x27; =&gt; &#x27;http:&#x2F;&#x2F;localhost&#x2F;image1&#x27;,
+   *              &#x27;url&#x27;   =&gt; &#x27;http:&#x2F;&#x2F;localhost&#x2F;url1&#x27;
    *      ),
    *      array(
    *              &#x27;title&#x27; =&gt; &#x27;title 2&#x27;,
    *              &#x27;desc&#x27;  =&gt; &#x27;desc 2&#x27;,
-   *              &#x27;image&#x27; =&gt; &#x27;http://localhost/image2&#x27;,
-   *              &#x27;url&#x27;   =&gt; &#x27;http://localhost/url2&#x27;
+   *              &#x27;image&#x27; =&gt; &#x27;http:&#x2F;&#x2F;localhost&#x2F;image2&#x27;,
+   *              &#x27;url&#x27;   =&gt; &#x27;http:&#x2F;&#x2F;localhost&#x2F;url2&#x27;
    *      )
    *    ) );
    * };
    * $wechat = WeChatSDK($APPSECRET, $APPID, $_token, array(
    *    &#x27;text&#x27; =&gt; $handleText
    * ));
-   * &lt;/pre&gt;
-   */
+   * &lt;&#x2F;pre&gt;
+   *&#x2F;
   static public function sendRichMsg($to, $from, $list, $flag = false){
     $i  = 0;
     $ii = count($list);
@@ -309,11 +420,11 @@ class WeChatSDK{
         $content,
         sprintf(
           &#x27;&lt;item&gt;
-            &lt;Title&gt;&lt;![CDATA[%s]]&gt;&lt;/Title&gt;
-            &lt;Description&gt;&lt;![CDATA[%s]]&gt;&lt;/Description&gt;
-            &lt;PicUrl&gt;&lt;![CDATA[%s]]&gt;&lt;/PicUrl&gt;
-            &lt;Url&gt;&lt;![CDATA[%s]]&gt;&lt;/Url&gt;
-          &lt;/item&gt;&#x27;,
+            &lt;Title&gt;&lt;![CDATA[%s]]&gt;&lt;&#x2F;Title&gt;
+            &lt;Description&gt;&lt;![CDATA[%s]]&gt;&lt;&#x2F;Description&gt;
+            &lt;PicUrl&gt;&lt;![CDATA[%s]]&gt;&lt;&#x2F;PicUrl&gt;
+            &lt;Url&gt;&lt;![CDATA[%s]]&gt;&lt;&#x2F;Url&gt;
+          &lt;&#x2F;item&gt;&#x27;,
           $item[&#x27;title&#x27;],
           $item[&#x27;desc&#x27;],
           $item[&#x27;image&#x27;],
@@ -324,15 +435,15 @@ class WeChatSDK{
     
     self::_send(sprintf( 
       &#x27;&lt;xml&gt;
-        &lt;ToUserName&gt;&lt;![CDATA[%s]]&gt;&lt;/ToUserName&gt;
-        &lt;FromUserName&gt;&lt;![CDATA[%s]]&gt;&lt;/FromUserName&gt;
-        &lt;CreateTime&gt;%s&lt;/CreateTime&gt;
-        &lt;MsgType&gt;&lt;![CDATA[news]]&gt;&lt;/MsgType&gt;
-        &lt;Content&gt;&lt;![CDATA[]]&gt;&lt;/Content&gt;
-        &lt;ArticleCount&gt;%s&lt;/ArticleCount&gt;
-        &lt;Articles&gt;%s&lt;/Articles&gt;
-        &lt;FuncFlag&gt;%s&lt;/FuncFlag&gt;
-      &lt;/xml&gt;&#x27;,
+        &lt;ToUserName&gt;&lt;![CDATA[%s]]&gt;&lt;&#x2F;ToUserName&gt;
+        &lt;FromUserName&gt;&lt;![CDATA[%s]]&gt;&lt;&#x2F;FromUserName&gt;
+        &lt;CreateTime&gt;%s&lt;&#x2F;CreateTime&gt;
+        &lt;MsgType&gt;&lt;![CDATA[news]]&gt;&lt;&#x2F;MsgType&gt;
+        &lt;Content&gt;&lt;![CDATA[]]&gt;&lt;&#x2F;Content&gt;
+        &lt;ArticleCount&gt;%s&lt;&#x2F;ArticleCount&gt;
+        &lt;Articles&gt;%s&lt;&#x2F;Articles&gt;
+        &lt;FuncFlag&gt;%s&lt;&#x2F;FuncFlag&gt;
+      &lt;&#x2F;xml&gt;&#x27;,
       $to,
       $from,
       time(),
@@ -343,7 +454,7 @@ class WeChatSDK{
     
   }
 
-  /**
+  &#x2F;**
    * @method sendMusic
    * @static
    * @param {String} $_to   : id, who will get the msg
@@ -354,9 +465,9 @@ class WeChatSDK{
    *                      &#x27;title&#x27;  =&gt; # {String} =&gt; music title
    *                      &#x27;desc&#x27;   =&gt; # {String} =&gt; music description
    *                      &#x27;url&#x27;    =&gt; # {String} =&gt; music url
-   *                      &#x27;hq_url&#x27; =&gt; # {String} =&gt; high quality music url， default = $_music[&#x27;music_url&#x27;]
+   *                      &#x27;hq_url&#x27; =&gt; # {String} =&gt; high quality music url, default = $_music[&#x27;url&#x27;]
    *                    )
-   * &lt;/pre&gt;
+   * &lt;&#x2F;pre&gt;
    * @param {bool} $flag    : Started this msg [default = false]
    * @example 
    * &lt;pre&gt;
@@ -366,26 +477,26 @@ class WeChatSDK{
    *    &#x27;url&#x27;    =&gt; &#x27;music url&#x27;,
    *    &#x27;hq_url&#x27; =&gt; &#x27;high quality music url&#x27;
    * ) );
-   * &lt;/pre&gt;
-   */
+   * &lt;&#x2F;pre&gt;
+   *&#x2F;
   static public function sendMusic($_to, $_from, $_music, $flag = 0) {
     if(!isset($_music[&#x27;hq_url&#x27;])){
       $_music[&#x27;hq_url&#x27;] = $_music[&#x27;url&#x27;];
     }
     self::_send(sprintf(
       &#x27;&lt;xml&gt;
-         &lt;ToUserName&gt;&lt;![CDATA[%s]]&gt;&lt;/ToUserName&gt;
-         &lt;FromUserName&gt;&lt;![CDATA[%s]]&gt;&lt;/FromUserName&gt;
-         &lt;CreateTime&gt;%s&lt;/CreateTime&gt;
-         &lt;MsgType&gt;&lt;![CDATA[music]]&gt;&lt;/MsgType&gt;
+         &lt;ToUserName&gt;&lt;![CDATA[%s]]&gt;&lt;&#x2F;ToUserName&gt;
+         &lt;FromUserName&gt;&lt;![CDATA[%s]]&gt;&lt;&#x2F;FromUserName&gt;
+         &lt;CreateTime&gt;%s&lt;&#x2F;CreateTime&gt;
+         &lt;MsgType&gt;&lt;![CDATA[music]]&gt;&lt;&#x2F;MsgType&gt;
          &lt;Music&gt;
-           &lt;Title&gt;&lt;![CDATA[%s]]&gt;&lt;/Title&gt;
-           &lt;Description&gt;&lt;![CDATA[%s]]&gt;&lt;/Description&gt;
-           &lt;MusicUrl&gt;&lt;![CDATA[%s]]&gt;&lt;/MusicUrl&gt;
-           &lt;HQMusicUrl&gt;&lt;![CDATA[%s]]&gt;&lt;/HQMusicUrl&gt;
-         &lt;/Music&gt;
-         &lt;FuncFlag&gt;0&lt;/FuncFlag&gt;
-       &lt;/xml&gt;&#x27;,
+           &lt;Title&gt;&lt;![CDATA[%s]]&gt;&lt;&#x2F;Title&gt;
+           &lt;Description&gt;&lt;![CDATA[%s]]&gt;&lt;&#x2F;Description&gt;
+           &lt;MusicUrl&gt;&lt;![CDATA[%s]]&gt;&lt;&#x2F;MusicUrl&gt;
+           &lt;HQMusicUrl&gt;&lt;![CDATA[%s]]&gt;&lt;&#x2F;HQMusicUrl&gt;
+         &lt;&#x2F;Music&gt;
+         &lt;FuncFlag&gt;0&lt;&#x2F;FuncFlag&gt;
+       &lt;&#x2F;xml&gt;&#x27;,
       $_to,
       $_from,
       time(),
@@ -397,28 +508,28 @@ class WeChatSDK{
     ));
   }
 
-  /**
+  &#x2F;**
    * @method sendText
    * @static
    * @param {String} $_to      : id, who will get the msg
    * @param {String} $_from    : id, who sent the msg
    * @param {String} $_content : msg content text
-   * @param {bool} $flag       : Started this msg [default = false]
+   * @param {bool}   $flag       : Started this msg [default = false]
    * @example
    * &lt;pre&gt;
    * WeChatSDK::sendText( $postObj[&#x27;from&#x27;], $postObj[&#x27;to&#x27;], &#x27;Hello&#x27;);
-   * &lt;/pre&gt;
-   */
+   * &lt;&#x2F;pre&gt;
+   *&#x2F;
   static public function sendText($_to, $_from, $_content, $flag = 0){
     self::_send(sprintf(
       &#x27;&lt;xml&gt;
-        &lt;ToUserName&gt;&lt;![CDATA[%s]]&gt;&lt;/ToUserName&gt;
-        &lt;FromUserName&gt;&lt;![CDATA[%s]]&gt;&lt;/FromUserName&gt;
-        &lt;CreateTime&gt;%s&lt;/CreateTime&gt;
-        &lt;MsgType&gt;&lt;![CDATA[text]]&gt;&lt;/MsgType&gt;
-        &lt;Content&gt;&lt;![CDATA[%s]]&gt;&lt;/Content&gt;
-        &lt;FuncFlag&gt;%s&lt;/FuncFlag&gt;
-      &lt;/xml&gt;&#x27;,
+        &lt;ToUserName&gt;&lt;![CDATA[%s]]&gt;&lt;&#x2F;ToUserName&gt;
+        &lt;FromUserName&gt;&lt;![CDATA[%s]]&gt;&lt;&#x2F;FromUserName&gt;
+        &lt;CreateTime&gt;%s&lt;&#x2F;CreateTime&gt;
+        &lt;MsgType&gt;&lt;![CDATA[text]]&gt;&lt;&#x2F;MsgType&gt;
+        &lt;Content&gt;&lt;![CDATA[%s]]&gt;&lt;&#x2F;Content&gt;
+        &lt;FuncFlag&gt;%s&lt;&#x2F;FuncFlag&gt;
+      &lt;&#x2F;xml&gt;&#x27;,
       $_to,
       $_from,
       time(),
@@ -427,15 +538,15 @@ class WeChatSDK{
     ));
   }
 
-  # / METHODS }}} =====================
+  # &#x2F; METHODS }}} =====================
 
   private static function _send($msg){
-    /**
+    &#x2F;**
      * @event actionHook::beforeSend
-     * @description before send msg to our customer, you can log/stop it by this event.&lt;br/&gt;
+     * @description before send msg to our customer, you can log&#x2F;stop it by this event.&lt;br&#x2F;&gt;
      * @example
      * &lt;pre&gt;
-     * // How to set it?
+     * &#x2F;&#x2F; How to set it?
      * new WeChatSDK(
      *    $APPSECRET, 
      *    $APPID,
@@ -445,8 +556,13 @@ class WeChatSDK{
      *      &#x27;beforeSend&#x27; =&gt; # {String|Function} the callable function or function name.
      *    )
      * );
-     * &lt;/pre&gt;
-     */
+     * &lt;&#x2F;pre&gt;
+     *&#x2F;
+    
+    if (!headers_sent()){
+      &#x2F;&#x2F; avoid xss in ie
+      header(&#x27;Content-Type: text&#x2F;xml&#x27;);
+    }
     self::_runActionHookFuncByType(&#x27;beforeSend&#x27;,$msg);
     echo $msg;
   }
@@ -456,7 +572,7 @@ class WeChatSDK{
     array_shift( $argvs );
     return isset($this-&gt;_handleReqFuncs[$type]) 
         &amp;&amp; call_user_func_array($this-&gt;_handleReqFuncs[$type], $argvs);
-        //&amp;&amp; $this-&gt;_handleReqFuncs[$type]($param);
+        &#x2F;&#x2F;&amp;&amp; $this-&gt;_handleReqFuncs[$type]($param);
   }
 
   private static function _runActionHookFuncByType($type){
@@ -464,7 +580,7 @@ class WeChatSDK{
     array_shift( $argvs );
     return isset(self::$_actionHookFuncs[$type]) 
       &amp;&amp; call_user_func_array(self::$_actionHookFuncs[$type], $argvs);
-        // &amp;&amp; self::$_actionHookFuncs[$type]($param, $param);
+        &#x2F;&#x2F; &amp;&amp; self::$_actionHookFuncs[$type]($param, $param);
   }
 
   private function _checkSignature(){
@@ -499,71 +615,70 @@ class WeChatSDK{
       ? self::$_errList[ $errcode ]
       : &#x27;ERROR_DESC_NO_FOUND&#x27;;
   }
-  private static function checkIsSuc($res){
-    $result = !isset($res[&#x27;errcode&#x27;]) || ( 0 == (int)$res[&#x27;errcode&#x27;]);
-    return $result;
+  protected static function checkIsSuc($res){
+    $result = isset($res[&#x27;access_token&#x27;]) 
+      || (isset($res[&#x27;errcode&#x27;]) &amp;&amp; ( 0 == (int)$res[&#x27;errcode&#x27;]));
+    return $result; 
   }
-  # / ERROR MSG }} ============================ 
+  # &#x2F; ERROR MSG }} ============================ 
 
-  # {{ CUSTOM MENU SET/GET/DELETE ===============
+  # {{ CUSTOM MENU SET&#x2F;GET&#x2F;DELETE ===============
 
-  /**
+  &#x2F;**
    * @method getMenuList
    * @static 
    * @description Get the current custom menu list
    * @return {Array|null} return list array when success, or nothing for failure
    * @example
    * &lt;pre&gt;
-   *       // Your codes here...
+   *       &#x2F;&#x2F; Your codes here...
    *       $wechat = new WeChatSDK($APPSECRET, $APPID, $_token);
    *       print_r( $wechat-&gt;getMenuList() );
-   *       // ...
-   * &lt;/pre&gt;
-   */
+   *       &#x2F;&#x2F; ...
+   * &lt;&#x2F;pre&gt;
+   *&#x2F;
   public function getMenuList(){
 
     $ACCESS_TOKEN = $this-&gt;_getAccessToken();
     $url = self::$_api_url_root;
-    $url = &quot;$url/cgi-bin/menu/get?access_token=$ACCESS_TOKEN&quot;;
+    $url = &quot;$url&#x2F;cgi-bin&#x2F;menu&#x2F;get?access_token=$ACCESS_TOKEN&quot;;
 
-    $json = file_get_contents($url);
+    $json = self::get($url);
     $res  = json_decode($json, true);
 
-    if ( self::checkIsSuc($res) ){
-      return $res;
-    }
+    return $res;
   }
 
-  /**
+  &#x2F;**
    * @method delMenuList
    * @static 
    * @return {boolen} Delete custom menu successfully?
    * @description Delete the custom menu
    * @example
    * &lt;pre&gt;
-   *       // Your codes here...
+   *       &#x2F;&#x2F; Your codes here...
    *       $wechat = new WeChatSDK($APPSECRET, $APPID, $_token);
    *       print_r( $wechat-&gt;delMenuList() ? &#x27;Yes&quot; : &#x27;No&#x27; );
-   *       // ...
-   * &lt;/pre&gt;
-   */
+   *       &#x2F;&#x2F; ...
+   * &lt;&#x2F;pre&gt;
+   *&#x2F;
   public function delMenuList(){
     $ACCESS_TOKEN = $this-&gt;_getAccessToken();
 
     $url = self::$_api_url_root;
-    $url = &quot;$url/cgi-bin/menu/delete?access_token=$ACCESS_TOKEN&quot;;
+    $url = &quot;$url&#x2F;cgi-bin&#x2F;menu&#x2F;delete?access_token=$ACCESS_TOKEN&quot;;
 
-    $json = file_get_contents($url);
+    $json = self::get($url);
     $res  = json_decode($json, true);
 
     $isSuc = self::checkIsSuc($res);
 
-    /**
+    &#x2F;**
      * @event actionHook::delMenuListResponse
      * @description Trigger once it got the response after try to delete custom menu
      * @example
      * &lt;pre&gt;
-     * // How to set it?
+     * &#x2F;&#x2F; How to set it?
      * new WeChatSDK(
      *    $APPSECRET, 
      *    $APPID,
@@ -573,8 +688,8 @@ class WeChatSDK{
      *      &#x27;delMenuListResponse&#x27; =&gt; # {String|Function} the callable function or function name.
      *    )
      * );
-     * &lt;/pre&gt;
-     */
+     * &lt;&#x2F;pre&gt;
+     *&#x2F;
     self::_runActionHookFuncByType(&#x27;delMenuListResponse&#x27;, $res);
     $result = self::checkIsSuc($res);
     if(!$result){
@@ -585,7 +700,7 @@ class WeChatSDK{
     return $result;
   }
 
-  /**
+  &#x2F;**
    * @method setMenuByJson
    * @static
    * @param {string} $json JSON Format.
@@ -614,49 +729,54 @@ class WeChatSDK{
    *        }
    *      ]
    *    }
-   * &lt;/pre&gt;
+   * &lt;&#x2F;pre&gt;
    * @example
    * &lt;pre&gt;
-   *       // Your codes here...
+   *       &#x2F;&#x2F; Your codes here...
    *       $wechat = new WeChatSDK($APPSECRET, $APPID, $_token);
    *       $json_string = json_decode( file_get_contents($json_file), true);
    *       $wechat-&gt;setMenuByJson($json_string);
-   *       // ...
-   * &lt;/pre&gt;
+   *       &#x2F;&#x2F; ...
+   * &lt;&#x2F;pre&gt;
    * @description 
-   */
-  public function setMenuByJson($json){
-    //$json = json_encode( json_decode($json) );
+   *&#x2F;
+  public function setMenuByJson($json = &#x27;&#x27;){
+    &#x2F;&#x2F;$json = json_encode( json_decode($json) );
 
-    if(!$json){ return false; }
-    $ACCESS_TOKEN = $this-&gt;_getAccessToken();
+    
+    if( !is_string($json) ){ 
+      return array(
+        &#x27;msg&#x27; =&gt; &#x27;Json String no found&#x27;
+      ); 
+    }
+
+    ;
+    if(!($ACCESS_TOKEN = $this-&gt;_getAccessToken())){
+      return false;
+    }
+
     $url = self::$_api_url_root;
-    $url = &quot;$url/cgi-bin/menu/create?access_token=$ACCESS_TOKEN&quot;;
+    $url = &quot;$url&#x2F;cgi-bin&#x2F;menu&#x2F;create?access_token=$ACCESS_TOKEN&quot;;
 
     $opts = array(
       &#x27;http&#x27; =&gt; array(  
         &#x27;method&#x27; =&gt; &#x27;POST&#x27;,  
         &#x27;header&#x27; =&gt; &quot;Connection: close\r\n&quot;.
-                    &quot;Content-Type: application/x-www-form-urlencoded\r\n&quot;.
+                    &quot;Content-Type: application&#x2F;x-www-form-urlencoded\r\n&quot;.
                     &quot;Content-Length: &quot;.strlen($json).&quot;\r\n&quot;,
         &#x27;content&#x27; =&gt; $json
       )
     );
 
+    $res = self::post($url, $json);
+    $res = $res ? json_decode(self::post($url, $json), true) : $res;
 
-    $json = file_get_contents(
-      $url, false, 
-      stream_context_create($opts)
-    );
-
-    $res  = json_decode($json, true);
-
-    /**
+    &#x2F;**
      * @event actionHook::setMenuListResponse
      * @description Trigger once it got the response after try to set custom menu
      * @example
      * &lt;pre&gt;
-     * // How to set it?
+     * &#x2F;&#x2F; How to set it?
      * new WeChatSDK(
      *    $APPSECRET, 
      *    $APPID,
@@ -666,11 +786,12 @@ class WeChatSDK{
      *      &#x27;setMenuListResponse&#x27; =&gt; # {String|Function} the callable function or function name.
      *    )
      * );
-     * &lt;/pre&gt;
-     */
+     * &lt;&#x2F;pre&gt;
+     *&#x2F;
     self::_runActionHookFuncByType(&#x27;setMenuListResponse&#x27;, $res);
 
     $result = self::checkIsSuc($res);
+
     if(!$result){
       $res[&#x27;msg&#x27;] = self::getErrorDesc($res);
       $result = $res;
@@ -679,16 +800,16 @@ class WeChatSDK{
   }
 
   # ------------------------------------------
-  # / CUSTOM MENU SET/GET/DELETE }}} ===============
+  # &#x2F; CUSTOM MENU SET&#x2F;GET&#x2F;DELETE }}} ===============
   private function _getAccessToken(){
     if ( time() &gt; $this-&gt;EXPIRE_TIME ){
       $APPID     = $this-&gt;APPID;
       $APPSECRET = $this-&gt;APPSECRET;
 
       $url = self::$_api_url_root;
-      $url  = &quot;$url/cgi-bin/token?grant_type=client_credential&amp;appid=$APPID&amp;secret=$APPSECRET&quot;;
+      $url  = &quot;$url&#x2F;cgi-bin&#x2F;token?grant_type=client_credential&amp;appid=$APPID&amp;secret=$APPSECRET&quot;;
 
-      $json = file_get_contents($url);
+      $json = self::get($url);
       $res  = json_decode($json, true);
       
       if ( self::checkIsSuc($res) ){
@@ -704,8 +825,8 @@ class WeChatSDK{
   private function _handlePostObj($postObj){
     $MsgType = strtolower((string)$postObj-&gt;MsgType);
     $result = array(
-      &#x27;from&#x27;  =&gt; (string) $postObj-&gt;FromUserName,
-      &#x27;to&#x27;    =&gt; (string) $postObj-&gt;ToUserName,
+      &#x27;from&#x27;  =&gt; (string) htmlspecialchars( $postObj-&gt;FromUserName ),
+      &#x27;to&#x27;    =&gt; (string) htmlspecialchars( $postObj-&gt;ToUserName ),
       &#x27;time&#x27;  =&gt; (int) $postObj-&gt;CreateTime,
       &#x27;type&#x27;  =&gt; (string) $MsgType
     );
@@ -719,29 +840,29 @@ class WeChatSDK{
 
     switch($result[&#x27;type&#x27;]){
       case &#x27;text&#x27;:
-        $result[&#x27;content&#x27;] = (string) $postObj-&gt;Content; // Content 消息内容
+        $result[&#x27;content&#x27;] = (string) $postObj-&gt;Content; &#x2F;&#x2F; Content 消息内容
         break;
 
       case &#x27;location&#x27;:
-        $result[&#x27;X&#x27;] = (float) $postObj-&gt;Location_X; // Location_X 地理位置纬度
-        $result[&#x27;Y&#x27;] = (float) $postObj-&gt;Location_Y; // Location_Y 地理位置经度
-        $result[&#x27;S&#x27;] = (float) $postObj-&gt;Scale;      // Scale 地图缩放大小
-        $result[&#x27;I&#x27;] = (string) $postObj-&gt;Label;      // Label 地理位置信息
+        $result[&#x27;X&#x27;] = (float) $postObj-&gt;Location_X; &#x2F;&#x2F; Location_X 地理位置纬度
+        $result[&#x27;Y&#x27;] = (float) $postObj-&gt;Location_Y; &#x2F;&#x2F; Location_Y 地理位置经度
+        $result[&#x27;S&#x27;] = (float) $postObj-&gt;Scale;      &#x2F;&#x2F; Scale 地图缩放大小
+        $result[&#x27;I&#x27;] = (string) $postObj-&gt;Label;      &#x2F;&#x2F; Label 地理位置信息
         break;
 
       case &#x27;image&#x27;:
-        $result[&#x27;url&#x27;] = (string) $postObj-&gt;PicUrl; // PicUrl 图片链接，开发者可以用HTTP GET获取
+        $result[&#x27;url&#x27;] = (string) $postObj-&gt;PicUrl; &#x2F;&#x2F; PicUrl 图片链接，开发者可以用HTTP GET获取
         break;
 
       case &#x27;link&#x27;:
-        $result[&#x27;title&#x27;] = (string) $postObj-&gt;Title;       // Content 消息标题
-        $result[&#x27;desc&#x27;]  = (string) $postObj-&gt;Description; // Content 消息标题
-        $result[&#x27;url&#x27;]   = (string) $postObj-&gt;Url;         // Content 消息标题
+        $result[&#x27;title&#x27;] = (string) $postObj-&gt;Title;       &#x2F;&#x2F; Content 消息标题
+        $result[&#x27;desc&#x27;]  = (string) $postObj-&gt;Description; &#x2F;&#x2F; Content 消息标题
+        $result[&#x27;url&#x27;]   = (string) $postObj-&gt;Url;         &#x2F;&#x2F; Content 消息标题
         break;
         
       case &#x27;event&#x27;:
-        $result[&#x27;event&#x27;] = strtolower((string) $postObj-&gt;Event);    // 事件类型，subscribe(订阅)、unsubscribe(取消订阅)、CLICK(自定义菜单点击事件)
-        $result[&#x27;key&#x27;]   = (string) $postObj-&gt;EventKey; // 事件KEY值，与自定义菜单接口中KEY值对应 
+        $result[&#x27;event&#x27;] = strtolower((string) $postObj-&gt;Event);    &#x2F;&#x2F; 事件类型，subscribe(订阅)、unsubscribe(取消订阅)、CLICK(自定义菜单点击事???
+        $result[&#x27;key&#x27;]   = (string) $postObj-&gt;EventKey; &#x2F;&#x2F; 事件KEY值，与自定义菜单接口中KEY值对???
         break;
 
     }
@@ -749,7 +870,72 @@ class WeChatSDK{
     return $result;
   }
 
-  // 请求消息的来源及流向
+  &#x2F;**
+   * @method post
+   * @static
+   * @param  {string}        $url URL to post data to
+   * @param  {string|array}  $data Data to be post
+   * @return {string|boolen} Response string or false for failure.
+   *&#x2F;
+  static public function post($url, $data){
+    if(is_array($data)){
+      $curlPost = array();
+      foreach($data as $key =&gt; $val){
+        $key = urlencode($key);
+        $val = urlencode($val);
+        array_push($curlPost, &quot;$key=$val&quot;);
+      }
+      $curlPost = implode($curlPost, &#x27;&amp;&#x27;);
+    } else if (is_string($data)){
+      $curlPost = $data;
+    } else {
+      $curlPost = print_r($data, true);
+    }
+
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, $url);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    # curl_setopt($ch, CURLOPT_HEADER, 1);
+    
+    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
+    curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, FALSE);
+    
+    curl_setopt($ch, CURLOPT_POST, 1);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, $curlPost);
+    $data = curl_exec($ch);
+    if(!$data) error_log( curl_error ( $ch ));
+    curl_close($ch);
+    return $data;
+  }
+
+  &#x2F;**
+   * @method get
+   * @static
+   * @param  {string}        $url URL to post data to
+   * @param  {string|array}  $data Data to be post
+   * @return {string|boolen} Response string or false for failure.
+   *&#x2F;
+  static public function get($url){
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, $url);
+    # curl_setopt($ch, CURLOPT_HEADER, 1);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+
+    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
+    curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, FALSE);
+
+    if(!curl_exec($ch)){
+      error_log( curl_error ( $ch ));
+      $data = &#x27;&#x27;; 
+    } else {
+      $data = curl_multi_getcontent($ch);
+
+    }
+    curl_close($ch);
+    return $data;
+  }
+
+  &#x2F;&#x2F; 请求消息的来源及流向
   private $_msgFrom;
   private $_msgTo;
 
@@ -764,34 +950,23 @@ class WeChatSDK{
   private $EXPIRE_TIME = 0;
 
 }
-</pre>
 
-</div> </div>
-        <div id="sidebar" class="span3"> <!-- vim:set filetype=html: -->
-<ul class="nav nav-list">
+    </pre>
+</div>
 
-<li class="nav-header">Classes</li>
-
-<li>
-<a href="../classes/WeChatSDK.html">WeChatSDK</a>
-</li>
-
-<li class="divider"></li>
-
-
-
-
-
-
-
-<li class="nav-header">Files</li>
-<ul><li>WechatSDK.php/<ul></ul></li></ul>
-<li class="divider"></li>
-
-</ul> </div>
-      </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-  </body>
+</div>
+<script src="..&#x2F;assets/vendor/prettify/prettify-min.js"></script>
+<script>prettyPrint();</script>
+<script src="..&#x2F;assets/js/yui-prettify.js"></script>
+<script src="..&#x2F;assets/../api.js"></script>
+<script src="..&#x2F;assets/js/api-filter.js"></script>
+<script src="..&#x2F;assets/js/api-list.js"></script>
+<script src="..&#x2F;assets/js/api-search.js"></script>
+<script src="..&#x2F;assets/js/apidocs.js"></script>
+</body>
 </html>
-<script type="text/javascript" src="../assets/js/jquery-1.8.2.min.js"></script>
-<script type="text/javascript"> if($('.prettyprint').length)$.getScript("https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js?lang=php"); </script>

@@ -27,7 +27,7 @@ class WeChatSDK{
    * @param {String} $APPSECRET           : APPSECRET
    * @param {String} $APPID               : APPID
    * @param {String} $_token              : The Token set by YOU
-   * @param {Array} $_handleReqFuncs      : [Selectable] Functions, for handle Request
+   * @param {Array}  $_handleReqFuncs      : [Selectable] Functions, for handle Request
    *  <pre>
    *    array(
    *      'common'      => function($postObj){},  # Handler for all data/event push request. [handleReqFuncs::common]
@@ -42,7 +42,7 @@ class WeChatSDK{
    *      '404'         => function(){},          # Handler for other case                [handleReqFuncs::404]
    *    )
    *  </pre>
-   * @param {Array} $_actionHookFuncs     : [Selectable] Common Functions for each instance
+   * @param {Array}  $_actionHookFuncs     : [Selectable] Common Functions for each instance
    * <pre>
    *    array(
    *      'beforeSend' => function($msg){} # @see event actionHook::beforeSend
@@ -86,12 +86,35 @@ class WeChatSDK{
    */
   public function accessDataPush(){
     if(isset($GLOBALS["HTTP_RAW_POST_DATA"])){
+      if(!$this->_checkSignature()){
+        return;
+      }
       $postObj = simplexml_load_string(
         $GLOBALS["HTTP_RAW_POST_DATA"],
         'SimpleXMLElement', 
         LIBXML_NOCDATA
       );
       $postObj = $this->_handlePostObj($postObj);
+
+      /**
+       * @event handleReqFuncs::commonBefore
+       * @description Trigger when receive push data. Before all other handle hook
+       * <br/> It can be handleReqFuncs::[text/image/location/link/event]
+       * @example
+       * <pre>
+       * // How to set it?
+       * new WeChatSDK(
+       *    $APPSECRET, 
+       *    $APPID,
+       *    $token,
+       *    array(
+       *      'commonBefore' => 
+       *    ),
+       *    $actionHookFuncs
+       * );
+       * </pre>
+        */
+      $this->_runHandleReqFuncByType('commonBefore', $postObj);
 
       // Call Special Request Handle Function 
       $this->_runHandleReqFuncByType($postObj['type'], $postObj);
@@ -219,7 +242,29 @@ class WeChatSDK{
        */
       $this->_runHandleReqFuncByType('accessCheck');
       if($this->_checkSignature()){
-        echo $_GET['echostr'];
+        /**
+         * @event handleReqFuncs::accessCheckSuccess
+         * @description Trigger when check signature success. Before send 'echostr'
+         * @example
+         * <pre>
+         * // How to set it?
+         * new WeChatSDK(
+         *    $APPSECRET, 
+         *    $APPID,
+         *    $token,
+         *    array(
+         *      'accessCheckSuccess' => 
+         *    ),
+         *    $actionHookFuncs
+         * );
+         * </pre>
+        */
+        $this->_runHandleReqFuncByType('accessCheckSuccess');
+        // avoid of xss
+        if (!headers_sent()){
+          header('Content-Type: text/plain');
+        }
+        echo preg_replace('/[^a-z0-9]/i', '', $_GET['echostr']);
       }
     } else {
       /**
@@ -238,7 +283,7 @@ class WeChatSDK{
    * @static
    * @param {String} $to   : id, who will get the msg
    * @param {String} $from : id, who sent the msg
-   * @param {Array} $list  : rich msg list. less then 10 items.
+   * @param {Array}  $list  : rich msg list. less then 10 items.
    * <strong>If you pass 10+ msg in, only 10 before will be send.</strong>
    * <pre>
    *          array(
@@ -332,7 +377,7 @@ class WeChatSDK{
    *                      'title'  => # {String} => music title
    *                      'desc'   => # {String} => music description
    *                      'url'    => # {String} => music url
-   *                      'hq_url' => # {String} => high quality music url， default = $_music['music_url']
+   *                      'hq_url' => # {String} => high quality music url, default = $_music['url']
    *                    )
    * </pre>
    * @param {bool} $flag    : Started this msg [default = false]
@@ -381,7 +426,7 @@ class WeChatSDK{
    * @param {String} $_to      : id, who will get the msg
    * @param {String} $_from    : id, who sent the msg
    * @param {String} $_content : msg content text
-   * @param {bool} $flag       : Started this msg [default = false]
+   * @param {bool}   $flag       : Started this msg [default = false]
    * @example
    * <pre>
    * WeChatSDK::sendText( $postObj['from'], $postObj['to'], 'Hello');
@@ -425,6 +470,11 @@ class WeChatSDK{
      * );
      * </pre>
      */
+    
+    if (!headers_sent()){
+      // avoid xss in ie
+      header('Content-Type: text/xml');
+    }
     self::_runActionHookFuncByType('beforeSend',$msg);
     echo $msg;
   }
@@ -477,9 +527,10 @@ class WeChatSDK{
       ? self::$_errList[ $errcode ]
       : 'ERROR_DESC_NO_FOUND';
   }
-  private static function checkIsSuc($res){
-    $result = !isset($res['errcode']) || ( 0 == (int)$res['errcode']);
-    return $result;
+  protected static function checkIsSuc($res){
+    $result = isset($res['access_token']) 
+      || (isset($res['errcode']) && ( 0 == (int)$res['errcode']));
+    return $result; 
   }
   # / ERROR MSG }} ============================ 
 
@@ -504,12 +555,10 @@ class WeChatSDK{
     $url = self::$_api_url_root;
     $url = "$url/cgi-bin/menu/get?access_token=$ACCESS_TOKEN";
 
-    $json = file_get_contents($url);
+    $json = self::get($url);
     $res  = json_decode($json, true);
 
-    if ( self::checkIsSuc($res) ){
-      return $res;
-    }
+    return $res;
   }
 
   /**
@@ -531,7 +580,7 @@ class WeChatSDK{
     $url = self::$_api_url_root;
     $url = "$url/cgi-bin/menu/delete?access_token=$ACCESS_TOKEN";
 
-    $json = file_get_contents($url);
+    $json = self::get($url);
     $res  = json_decode($json, true);
 
     $isSuc = self::checkIsSuc($res);
@@ -603,11 +652,21 @@ class WeChatSDK{
    * </pre>
    * @description 
    */
-  public function setMenuByJson($json){
+  public function setMenuByJson($json = ''){
     //$json = json_encode( json_decode($json) );
 
-    if(!$json){ return false; }
-    $ACCESS_TOKEN = $this->_getAccessToken();
+    
+    if( !is_string($json) ){ 
+      return array(
+        'msg' => 'Json String no found'
+      ); 
+    }
+
+    ;
+    if(!($ACCESS_TOKEN = $this->_getAccessToken())){
+      return false;
+    }
+
     $url = self::$_api_url_root;
     $url = "$url/cgi-bin/menu/create?access_token=$ACCESS_TOKEN";
 
@@ -621,13 +680,8 @@ class WeChatSDK{
       )
     );
 
-
-    $json = file_get_contents(
-      $url, false, 
-      stream_context_create($opts)
-    );
-
-    $res  = json_decode($json, true);
+    $res = self::post($url, $json);
+    $res = $res ? json_decode(self::post($url, $json), true) : $res;
 
     /**
      * @event actionHook::setMenuListResponse
@@ -649,6 +703,7 @@ class WeChatSDK{
     self::_runActionHookFuncByType('setMenuListResponse', $res);
 
     $result = self::checkIsSuc($res);
+
     if(!$result){
       $res['msg'] = self::getErrorDesc($res);
       $result = $res;
@@ -666,7 +721,7 @@ class WeChatSDK{
       $url = self::$_api_url_root;
       $url  = "$url/cgi-bin/token?grant_type=client_credential&appid=$APPID&secret=$APPSECRET";
 
-      $json = file_get_contents($url);
+      $json = self::get($url);
       $res  = json_decode($json, true);
       
       if ( self::checkIsSuc($res) ){
@@ -682,8 +737,8 @@ class WeChatSDK{
   private function _handlePostObj($postObj){
     $MsgType = strtolower((string)$postObj->MsgType);
     $result = array(
-      'from'  => (string) $postObj->FromUserName,
-      'to'    => (string) $postObj->ToUserName,
+      'from'  => (string) htmlspecialchars( $postObj->FromUserName ),
+      'to'    => (string) htmlspecialchars( $postObj->ToUserName ),
       'time'  => (int) $postObj->CreateTime,
       'type'  => (string) $MsgType
     );
@@ -718,13 +773,78 @@ class WeChatSDK{
         break;
         
       case 'event':
-        $result['event'] = strtolower((string) $postObj->Event);    // 事件类型，subscribe(订阅)、unsubscribe(取消订阅)、CLICK(自定义菜单点击事件)
-        $result['key']   = (string) $postObj->EventKey; // 事件KEY值，与自定义菜单接口中KEY值对应 
+        $result['event'] = strtolower((string) $postObj->Event);    // 事件类型，subscribe(订阅)、unsubscribe(取消订阅)、CLICK(自定义菜单点击事???
+        $result['key']   = (string) $postObj->EventKey; // 事件KEY值，与自定义菜单接口中KEY值对???
         break;
 
     }
 
     return $result;
+  }
+
+  /**
+   * @method post
+   * @static
+   * @param  {string}        $url URL to post data to
+   * @param  {string|array}  $data Data to be post
+   * @return {string|boolen} Response string or false for failure.
+   */
+  static public function post($url, $data){
+    if(is_array($data)){
+      $curlPost = array();
+      foreach($data as $key => $val){
+        $key = urlencode($key);
+        $val = urlencode($val);
+        array_push($curlPost, "$key=$val");
+      }
+      $curlPost = implode($curlPost, '&');
+    } else if (is_string($data)){
+      $curlPost = $data;
+    } else {
+      $curlPost = print_r($data, true);
+    }
+
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, $url);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    # curl_setopt($ch, CURLOPT_HEADER, 1);
+    
+    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
+    curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, FALSE);
+    
+    curl_setopt($ch, CURLOPT_POST, 1);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, $curlPost);
+    $data = curl_exec($ch);
+    if(!$data) error_log( curl_error ( $ch ));
+    curl_close($ch);
+    return $data;
+  }
+
+  /**
+   * @method get
+   * @static
+   * @param  {string}        $url URL to post data to
+   * @param  {string|array}  $data Data to be post
+   * @return {string|boolen} Response string or false for failure.
+   */
+  static public function get($url){
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, $url);
+    # curl_setopt($ch, CURLOPT_HEADER, 1);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+
+    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
+    curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, FALSE);
+
+    if(!curl_exec($ch)){
+      error_log( curl_error ( $ch ));
+      $data = ''; 
+    } else {
+      $data = curl_multi_getcontent($ch);
+
+    }
+    curl_close($ch);
+    return $data;
   }
 
   // 请求消息的来源及流向
