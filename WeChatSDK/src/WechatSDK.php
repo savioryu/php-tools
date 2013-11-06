@@ -404,8 +404,9 @@ class WeChatSDK{
          <Music>
            <Title><![CDATA[%s]]></Title>
            <Description><![CDATA[%s]]></Description>
-           <MusicUrl><![CDATA[%s]]></MusicUrl>
+           <MusicURL><![CDATA[%s]]></MusicURL>
            <HQMusicUrl><![CDATA[%s]]></HQMusicUrl>
+           <ThumbMediaId><![CDATA[%s]]></ThumbMediaId>
          </Music>
          <FuncFlag>0</FuncFlag>
        </xml>',
@@ -416,7 +417,7 @@ class WeChatSDK{
       $_music['desc'],
       $_music['url'],
       $_music['hq_url'],
-      $flag
+	  $_music['mid']
     ));
   }
 
@@ -449,6 +450,10 @@ class WeChatSDK{
       $flag
     ));
   }
+
+  // TODO 回复视频消息
+  // TODO 回复语音消息
+  // TODO 回复图片消息
 
   # / METHODS }}} =====================
 
@@ -711,6 +716,19 @@ class WeChatSDK{
     return $result;
   }
 
+  // TODO 发送客服消息
+  // @see http://mp.weixin.qq.com/wiki/index.php?title=%E5%8F%91%E9%80%81%E5%AE%A2%E6%9C%8D%E6%B6%88%E6%81%AF
+  //
+  // TODO 用户管理
+  //	TODO 分组管理接口
+  //	@see http://mp.weixin.qq.com/wiki/index.php?title=%E5%88%86%E7%BB%84%E7%AE%A1%E7%90%86%E6%8E%A5%E5%8F%A3
+  //	...
+  //
+  // TODO 生成带参数的二维码
+  // @see http://mp.weixin.qq.com/wiki/index.php?title=%E7%94%9F%E6%88%90%E5%B8%A6%E5%8F%82%E6%95%B0%E7%9A%84%E4%BA%8C%E7%BB%B4%E7%A0%81
+  //
+  // 
+
   # ------------------------------------------
   # / CUSTOM MENU SET/GET/DELETE }}} ===============
   private function _getAccessToken(){
@@ -763,8 +781,20 @@ class WeChatSDK{
         break;
 
       case 'image':
-        $result['url'] = (string) $postObj->PicUrl; // PicUrl 图片链接，开发者可以用HTTP GET获取
+        $result['url'] = (string) $postObj->PicUrl;  // PicUrl 图片链接，开发者可以用HTTP GET获取
+        $result['mid'] = (string) $postObj->MediaId; // MediaId 图片消息媒体id，可以调用多媒体文件下载接口拉取数据。
         break;
+
+	  case 'video':
+		$result['mid']      = (string) $postObj->MediaId;      // MediaId 图片消息媒体id，可以调用多媒体文件下载接口拉取数据。
+		$result['thumbmid'] = (string) $postObj->ThumbMediaId; // ThumbMediaId 视频消息缩略图的媒体id，可以调用多媒体文件下载接口拉取数据。
+		break;
+
+	  case 'link':
+		$result['title'] = (string) $postObj->Title;       // 消息标题
+		$result['desc']  = (string) $postObj->Description; // 消息描述
+		$result['url']   = (string) $postObj->Url;         // 消息链接
+		break;
 
       case 'link':
         $result['title'] = (string) $postObj->Title;       // Content 消息标题
@@ -774,9 +804,33 @@ class WeChatSDK{
         
       case 'event':
         $result['event'] = strtolower((string) $postObj->Event);    // 事件类型，subscribe(订阅)、unsubscribe(取消订阅)、CLICK(自定义菜单点击事???
-        $result['key']   = (string) $postObj->EventKey; // 事件KEY值，与自定义菜单接口中KEY值对???
+		switch( $result['event'] ){
+
+			case 'subscribe': // 扫描带参数二维码事件
+				$result['key'] = str_replace( 'qrscene_', '', (string) $postObj->EventKey ); // 事件KEY值，qrscene_为前缀，后面为二维码的参数值
+				break;
+
+			case 'location': // 上报地理位置事件
+				$result['la'] = (string) $postObj->Latitude;  // 地理位置纬度
+				$result['lo'] = (string) $postObj->Longitude; // 地理位置经度
+				$result['p']  = (string) $postObj->Precision; // 地理位置精度
+				break;
+
+			case 'click': // 自定义菜单事件
+				$result['key']   = (string) $postObj->EventKey; // 事件KEY值，与自定义菜单接口中KEY值对???
+				break;
+
+			# case 'subscribe':  // subscribe(订阅)
+			# case 'unsubscribe': // unsubscribe(取消订阅)
+			# default:
+		}
         break;
 
+	  case 'voice':
+		$result['mid']    = (string) $postObj->MediaID;     // 语音消息媒体id，可以调用多媒体文件下载接口拉取该媒体
+		$result['format'] = (string) $postObj->Format;      // 语音格式：amr
+		$result['txt']    = (string) $postObj->Recognition; // 语音识别结果，UTF8编码
+		break;
     }
 
     return $result;
@@ -846,6 +900,11 @@ class WeChatSDK{
     curl_close($ch);
     return $data;
   }
+
+  // TODO 上传下载多媒体文件
+  // @see http://mp.weixin.qq.com/wiki/index.php?title=%E4%B8%8A%E4%BC%A0%E4%B8%8B%E8%BD%BD%E5%A4%9A%E5%AA%92%E4%BD%93%E6%96%87%E4%BB%B6
+  //
+  // TODO 
 
   // 请求消息的来源及流向
   private $_msgFrom;

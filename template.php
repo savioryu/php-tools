@@ -37,14 +37,11 @@ abstract class template{
     if(!file_exists($path)){
       return '';
     }
-    foreach($params as $key => $val){
-      $$key = $val;
-    }
+    extract( $params );
     ob_start();
     include($path);
     $result = ob_get_contents();
     ob_end_clean();
-    echo "\n[S][includeTmpl] $path\n";
     return $result;
   }
 }
